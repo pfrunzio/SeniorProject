@@ -1,4 +1,4 @@
-# SeniorProject
+# Senior Project
 
 by Paola and Brandon
 
