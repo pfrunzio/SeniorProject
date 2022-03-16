@@ -1,3 +1,6 @@
 # SeniorProject
 
-# by Paola and Brandon
+by Paola and Brandon
+
+
+Banked Curves Simulation
