@@ -29,8 +29,9 @@ function draw() {
   let locX = mouseX - height / 2;
   let locY = mouseY - width / 2;
 
-  ambientLight(100);
-  pointLight(255, 255, 255, 0, 0, -100);
+  ambientLight(140);
+  //pointLight(2550, 2550, 2550, 0, 0, -1*frameCount);
+
   drawTrack();
   let fr = 1;
   if (frameRate() != 0){
@@ -43,8 +44,13 @@ function drawTrack() {
   rotateZ(0*frameCount*0.5);
   rotateX(-70);
   rotateY(0);
-  fill(255);
+
+  directionalLight(160,160,160,0,-1,0);
+  fill(40);
+  circle(0,0,0,0,0);
+
   noStroke();
+
 
   push();
   let habove = trackAbove*sin(angle);
@@ -52,22 +58,25 @@ function drawTrack() {
   let h = bigradius * (sin(angle)/sin(90-angle));
   translate(0,h/2-habove,0);
   cone(bigradius,h,64,16,false);
+  cylinder(bigradius,h,64,16,false,false);
   pop();
 
   push();
   translate(0,0,0);
-  fill(0);
+  fill(255);
   rotateX(-90);
   plane(800);
   pop();
 
   push();
+
   translate(0,-habove/2,0);
   rotateY(carPos%360);
 
 
   push();
   //rotateZ(angle);
+  stroke(0);
   translate(radius,0,0);
   rotateZ(-angle);
   translate(0,-carHeight/2-1,0);
