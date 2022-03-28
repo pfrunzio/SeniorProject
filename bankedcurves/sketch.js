@@ -14,7 +14,7 @@ var ui;
 
 function setup() {
   createCanvas(800, 600, WEBGL);
-  ui = createGraphics(80, 60, P2D);
+  ui = createGraphics(800, 600, P2D);
   trackResolution = 1;
   angle = 20;
   speed = 500;
@@ -40,12 +40,8 @@ function draw() {
   drawTrack();
   drawUI();
 
-  ui.background(0);
-  ui.fill(255,0,0);
-  let button = ui.createButton('submit');
-  button.position(50,50);
 
-  image(ui,-400,-300);
+  //image(ui,-400,-300);
 
   let fr = 1;
   if (frameRate() != 0){
@@ -55,6 +51,11 @@ function draw() {
 }
 
 function drawTrack() {
+  strokeWeight(10);
+  stroke(255,0,0);
+  quad(0,0,0,0,0,0,0,0,0,0,0,0);
+  point(10,-90,0);
+  point(-10,-90,0);
   push(); // camera
     translate(-200,-100,0);
     rotateZ(0*frameCount*0.5);
@@ -74,6 +75,8 @@ function drawTrack() {
       let h = bigradius * (sin(angle)/sin(90-angle));
       translate(0,h/2-habove,0);
       cone(bigradius,h,64,16,false);
+      fill(0);
+
       fill(20);
       cylinder(bigradius,h,64,16,false,false);
     pop();
@@ -134,6 +137,6 @@ function drawTrack() {
 }
 
 function drawUI() {
-  push();
-    sphere();
+  //push();
+    //sphere();
 }
