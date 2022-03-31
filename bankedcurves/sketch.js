@@ -12,43 +12,50 @@ var carPos;
 var wheelRadius;
 var ui;
 
-function setup() {
-  createCanvas(800, 600, WEBGL);
-  ui = createGraphics(800, 600, P2D);
-  trackResolution = 1;
-  angle = 20;
-  speed = 500;
-  radius = 140;
-  trackAbove = 40;
-  carHeight = 10;
-  carLength = 30;
-  carWidth = 15;
-  carPos = 0;
-  wheelRadius = 5;
-  angleMode(DEGREES);
-}
-
-function draw() {
-  background(220);
-  let locX = mouseX - height / 2;
-  let locY = mouseY - width / 2;
-
-
-  ambientLight(140);
-  //pointLight(2550, 2550, 2550, 0, 0, -1*frameCount);
-
-  drawTrack();
-  drawUI();
+new p5(function() {
+  setup = function() {
+    createCanvas(800, 600, WEBGL);  // <--- WEBGL
+    trackResolution = 1;
+    angle = 20;
+    speed = 500;
+    radius = 140;
+    trackAbove = 40;
+    carHeight = 10;
+    carLength = 30;
+    carWidth = 15;
+    carPos = 0;
+    wheelRadius = 5;
+    angleMode(DEGREES);
+  };
+  draw = function() {
+    background(220);
+    let locX = mouseX - height / 2;
+    let locY = mouseY - width / 2;
 
 
-  //image(ui,-400,-300);
+    ambientLight(140);
+    //pointLight(2550, 2550, 2550, 0, 0, -1*frameCount);
 
-  let fr = 1;
-  if (frameRate() != 0){
-    fr = frameRate();
-  }
-  carPos += 180 * speed / (PI*radius*fr);
-}
+    drawTrack();
+
+    let fr = 1;
+    if (frameRate() != 0) {
+      fr = frameRate();
+    }
+    carPos += 180 * speed / (PI*radius*fr);
+  };
+});
+
+new p5(function(ui) {
+  ui.setup = function() {
+    ui.createCanvas(100, 600, ui.P2D);
+  };
+  ui.draw = function() {
+    ui.background(0);
+
+    drawUI();
+  };
+});
 
 function drawTrack() {
   strokeWeight(10);
@@ -134,9 +141,9 @@ function drawTrack() {
       pop();
     pop();
   pop();
-}
+};
 
 function drawUI() {
-  //push();
-    //sphere();
-}
+  fill(255);
+  rect(20,20,50,50);
+};
