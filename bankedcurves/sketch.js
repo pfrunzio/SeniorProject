@@ -65,6 +65,16 @@ var u = function(p) {
 };
 var myp5 = new p5(u, 'ui');
 
+var f = function(p) {
+  p.setup = function() {
+    p.createCanvas(200, 200, p.P2D);
+  };
+  p.draw = function() {
+    p.background(220);
+  };
+};
+var myp5 = new p5(f, 'fbd');
+
 function drawTrack(p = p5.instance) {
 
   p.push(); // camera
