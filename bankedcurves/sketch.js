@@ -2,6 +2,7 @@ var radius;
 var angle;
 var fcoeff;
 var speed;
+var mass;
 var gravity;
 var trackResolution;
 var trackAbove;
@@ -16,8 +17,10 @@ var t = function(p) {
   p.setup = function() {
     p.createCanvas(800, 600, p.WEBGL);
     trackResolution = 1;
-    angle = 20;
-    speed = 500;
+    angle = 40;
+    speed = 50;
+    mass = 10;
+    gravity = 9.81;
     radius = 140;
     trackAbove = 40;
     carHeight = 10;
@@ -68,9 +71,12 @@ var myp5 = new p5(u, 'ui');
 var f = function(p) {
   p.setup = function() {
     p.createCanvas(200, 200, p.P2D);
+    p.angleMode(p.DEGREES);
   };
   p.draw = function() {
     p.background(220);
+
+    drawFBD(p);
   };
 };
 var myp5 = new p5(f, 'fbd');
@@ -125,6 +131,7 @@ function drawTrack(p = p5.instance) {
         //translate(radius*sin(angle),-radius*sin(90-angle),0);
         //translate(radius*sin(90-angle),radius*sin(angle),0);
         p.fill(255,0,0);
+        p.strokeWeight(1);
         p.box(carWidth,carHeight,carLength);
         p.fill(200);
         p.strokeWeight(1);
@@ -162,3 +169,54 @@ function drawUI(p = p5.instance) {
   p.fill(255);
   p.rect(20,20,50,50);
 };
+
+function drawFBD(p = p5.instance){
+
+  // track
+  let tSize = 150;
+  let h = tSize;
+  let w = tSize * p.sin(90-angle) / p.sin(angle);
+  if (w > tSize){
+    h = h * tSize / w;
+    w = tSize;
+  }
+  let hyp = p.sqrt(h*h+w*w);
+  p.fill(0);
+  p.triangle(100-w/2,100-h/2,100-w/2,100+h/2,100+w/2,100+h/2);
+
+  // cart
+  p.push();
+    p.translate(100-w/2,100-h/2);
+    p.rotate(angle);
+    p.translate(hyp/2,0);
+    p.fill(255,0,0);
+    p.rect(-carLength/2,-carHeight-wheelRadius,carLength,carHeight);
+    p.ellipseMode(p.CENTER);
+    p.fill(200);
+    p.circle(-carLength/2+wheelRadius+2,-wheelRadius,wheelRadius*2);
+    p.circle(carLength/2-wheelRadius-2,-wheelRadius,wheelRadius*2);
+
+    // vector lengths
+    let F_G = mass * gravity;
+    let F_N = 
+
+    // arrows
+    // positive x is down the slope, positive y is into the slope
+    drawArrow(p,p.createVector(0,0),p.createVector(0,-40),'green',3,7);
+    p.rotate(-angle);
+    drawArrow(p,p.createVector(0,0),p.createVector(0,mass*gravity),'green',3,7);
+  p.pop();
+}
+
+function drawArrow(p = p5.instance, start, end, color, width, size){
+  p.push();
+  p.stroke(color);
+  p.strokeWeight(3);
+  p.fill(color);
+  p.translate(start.x,start.y);
+  p.line(0,0,end.x,end.y);
+  p.rotate(end.heading());
+  p.translate(end.mag() - size, 0);
+  p.triangle(0, size/2, 0, -size/2, size, 0);
+  p.pop();
+}
