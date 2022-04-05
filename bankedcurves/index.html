@@ -2,14 +2,23 @@
 
 <html>
   <head>
-        <style>
-        </style>
+        <link rel="stylesheet" href="style.css">
         <script src="https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.js"></script>
         <script src="sketch.js"></script>
     </head>
     <body>
       <span id="track"></span>
-      <span id="ui"></span>
+      <span id="ui">
+        <span class="slidecontainer">
+          <input type="range" min="100" max="200" value="100" class="slider" id="radiusSlider">
+        </span>
+      </span>
+
       <span id="fbd"></span>
+      <label class="switch">
+        <input type="checkbox" id="cartSwitch" value="true"> Cart
+        <span class="s round"></span>
+      </label>
+
     </body>
 </html>
