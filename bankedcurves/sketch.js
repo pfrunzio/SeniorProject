@@ -18,8 +18,9 @@ var t = function(p) {
     p.createCanvas(800, 600, p.WEBGL);
     trackResolution = 1;
     angle = 40;
-    speed = 50;
-    mass = 10;
+    fcoeff = 0.4;
+    speed = 500;
+    mass = 100;
     gravity = 9.81;
     radius = 140;
     trackAbove = 40;
@@ -198,13 +199,16 @@ function drawFBD(p = p5.instance){
 
     // vector lengths
     let F_G = mass * gravity;
-    let F_N = 
+    let F_N = F_G * p.cos(angle);
+    // mv^2/r = F_Gsin - F_fs
+    let F_fs = F_G * p.sin(angle) - mass * speed * speed / radius;
 
     // arrows
     // positive x is down the slope, positive y is into the slope
-    drawArrow(p,p.createVector(0,0),p.createVector(0,-40),'green',3,7);
+    drawArrow(p,p.createVector(0,0),p.createVector(0,-F_N),'green',3,7);
+    drawArrow(p,p.createVector(0,0),p.createVector(F_fs,0),'green',3,7);
     p.rotate(-angle);
-    drawArrow(p,p.createVector(0,0),p.createVector(0,mass*gravity),'green',3,7);
+    drawArrow(p,p.createVector(0,0),p.createVector(0,F_G),'green',3,7);
   p.pop();
 }
 
