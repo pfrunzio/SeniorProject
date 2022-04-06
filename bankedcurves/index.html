@@ -7,18 +7,37 @@
         <script src="sketch.js"></script>
     </head>
     <body>
-      <span id="track"></span>
-      <span id="ui">
-        <span class="slidecontainer">
-          <input type="range" min="100" max="200" value="100" class="slider" id="radiusSlider">
-        </span>
-      </span>
+      <div class="row">
+        <div class="column">
+          <div id="track"></div>
+        </div>
+        <div  class="column">
+          <div id="ui" style="background-color:#aaa">
+            <div class="uielement">
+              <div>
+                Track Radius
+              </div>
+              <div class="slidecontainer">
+                <input type="range" min="10" max="200" value="100" class="slider" oninput="changeRadiusSlider(this.value)">
+              </div>
+            </div>
+            <div class="uielement">
+              <div>
+                Curve Angle
+              </div>
+              <div class="slidecontainer">
+                <input type="range" min="10" max="80" value="40" class="slider" oninput="changeAngleSlider(this.value)">
+              </div>
+            </div>
+          </div>
 
-      <span id="fbd"></span>
-      <label class="switch">
-        <input type="checkbox" id="cartSwitch" value="true"> Cart
-        <span class="s round"></span>
-      </label>
+          <div id="fbd"></div>
+          <label class="switch">
+            <input type="checkbox" id="cartSwitch" value="true"> Cart
+            <div class="s round"></div>
+          </label>
+        </div>
+      </div>
 
     </body>
 </html>

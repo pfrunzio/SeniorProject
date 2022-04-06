@@ -12,7 +12,7 @@ var carWidth;
 var carPos;
 var wheelRadius;
 var ui;
-var radiusSlider = document.getElementById("radiusSlider");
+var tempRadius;
 
 var t = function(p) {
   p.setup = function() {
@@ -53,9 +53,13 @@ var t = function(p) {
   };
 };
 
-// radiusSlider.oninput = function() {
-//   radius = this.value;
-// }
+function changeRadiusSlider(i){
+  radius = Number(i);
+}
+function changeAngleSlider(i){
+  angle = Number(i);
+}
+
 var myp5 = new p5(t, "track");
 
 // var u = function(p) {
@@ -84,11 +88,11 @@ var f = function(p) {
 var myp5 = new p5(f, 'fbd');
 
 function drawTrack(p = p5.instance) {
-
+  //radius += 0.5;
   p.push(); // camera
-    p.translate(-200,-100,0);
+    //p.translate(-200,-100,0);
     p.rotateZ(0*p.frameCount*0.5);
-    p.rotateX(-70);
+    p.rotateX(-50);
     p.rotateY(0);
 
     p.directionalLight(160,160,160,0,-1,0);
@@ -112,10 +116,9 @@ function drawTrack(p = p5.instance) {
     p.pop();
 
     p.push(); // ground
-      p.translate(0,10,0);
       p.fill(255);
-      p.rotateX(0);
-      p.cylinder(149,20);
+      p.rotateX(90);
+      p.plane(2000);
     p.pop();
 
     p.push(); // car
