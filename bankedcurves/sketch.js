@@ -59,6 +59,18 @@ function changeRadiusSlider(i){
 function changeAngleSlider(i){
   angle = Number(i);
 }
+function changeFrictionSlider(i){
+  fcoeff = Number(i)/100;
+}
+function changeSpeedSlider(i){
+  speed = Number(i);
+}
+function changeGravitySlider(i){
+  gravity = Number(i);
+}
+function changeMassSlider(i){
+  mass = Number(i);
+}
 
 var myp5 = new p5(t, "track");
 
