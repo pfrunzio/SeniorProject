@@ -197,7 +197,10 @@ function drawFBD(p = p5.instance){
     p.rotate(angle);
     p.translate(hyp/2,0);
 
-    if (cartSwitch == true) {
+    const cartSwitch = document.querySelector('#cartSwitch');
+    console.log(cartSwitch.checked);
+
+    if (cartSwitch.checked == true) {
       p.fill(255,0,0);
       p.rect(-carLength/2,-carHeight-wheelRadius,carLength,carHeight);
       p.ellipseMode(p.CENTER);
