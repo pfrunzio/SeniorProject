@@ -52,6 +52,7 @@ var t = function(p) {
 
   };
 };
+var myp5 = new p5(t, "track");
 
 function changeRadiusSlider(i){
   radius = Number(i);
@@ -60,29 +61,17 @@ function changeAngleSlider(i){
   angle = Number(i);
 }
 
-var myp5 = new p5(t, "track");
-
-// var u = function(p) {
-//   p.setup = function() {
-//     p.createCanvas(100, 600, p.P2D);
-//   };
-//   p.draw = function() {
-//     p.background(50,50,50);
-//
-//     drawUI(p);
-//   };
-// };
-// var myp5 = new p5(u, 'ui');
-
 var f = function(p) {
   p.setup = function() {
     p.createCanvas(200, 200, p.P2D);
     p.angleMode(p.DEGREES);
+
   };
   p.draw = function() {
     p.background(220);
 
     drawFBD(p);
+
   };
 };
 var myp5 = new p5(f, 'fbd');
@@ -170,11 +159,6 @@ function drawTrack(p = p5.instance) {
   p.pop();
 };
 
-function drawUI(p = p5.instance) {
-  p.fill(255);
-  p.rect(20,20,50,50);
-};
-
 function drawFBD(p = p5.instance){
 
   // track
@@ -219,10 +203,32 @@ function drawFBD(p = p5.instance){
     values = clamp(p,values,50);
     // arrows
     // positive x is down the slope, positive y is into the slope
-    drawArrow(p,p.createVector(0,0),p.createVector(0,-values[1]),'green',3,7);
-    drawArrow(p,p.createVector(0,0),p.createVector(-values[2],0),'green',3,7);
+    drawArrow(p,p.createVector(0,0),p.createVector(0,-values[1]),'purple',3,7); //normal force
+    //label
     p.rotate(-angle);
-    drawArrow(p,p.createVector(0,0),p.createVector(0,values[0]),'green',3,7);
+    p.fill('white');
+    p.stroke('purple');
+    p.textSize(16);
+    p.text('Fn', 10, -10);
+    p.rotate(angle);
+
+    drawArrow(p,p.createVector(0,0),p.createVector(-values[2],0),'orange',3,7); //frictional force
+    //label
+    p.rotate(-angle);
+    p.fill('white');
+    p.stroke('orange');
+    p.textSize(16);
+    p.text('Ffs', -50, -10);
+    p.rotate(angle);
+
+    p.rotate(-angle);
+    drawArrow(p,p.createVector(0,0),p.createVector(0,values[0]),'green',3,7); //gravitational force
+    //label
+    p.fill('white');
+    p.stroke('green');
+    p.textSize(16);
+    p.text('Fg', 10, 30);
+
   p.pop();
 
 }
