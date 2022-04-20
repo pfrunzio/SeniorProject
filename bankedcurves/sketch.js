@@ -145,6 +145,9 @@ function changeRadiusSlider(i){
 function changeAngleSlider(i){
   angle = Number(i);
 }
+function changeMassSlider(i){
+  mass = Number(i);
+}
 
 var f = function(p) {
   p.setup = function() {
