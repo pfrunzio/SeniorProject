@@ -18,7 +18,7 @@ var t = function(p) {
   p.setup = function() {
     // setup HTML elements
 
-    p.createCanvas(800, 600, p.WEBGL);
+    p.createCanvas(600, 500, p.WEBGL);
     trackResolution = 1;
     angle = 40;
     fcoeff = 0.4;
@@ -54,27 +54,6 @@ var t = function(p) {
 };
 var myp5 = new p5(t, "track");
 
-function changeRadiusSlider(i){
-  radius = Number(i);
-}
-function changeAngleSlider(i){
-  angle = Number(i);
-}
-
-var f = function(p) {
-  p.setup = function() {
-    p.createCanvas(200, 200, p.P2D);
-    p.angleMode(p.DEGREES);
-
-  };
-  p.draw = function() {
-    p.background(220);
-
-    drawFBD(p);
-
-  };
-};
-var myp5 = new p5(f, 'fbd');
 
 function drawTrack(p = p5.instance) {
   //radius += 0.5;
@@ -83,6 +62,7 @@ function drawTrack(p = p5.instance) {
     p.rotateZ(0*p.frameCount*0.5);
     p.rotateX(-50);
     p.rotateY(0);
+    p.translate(0,-50,0);
 
     p.directionalLight(160,160,160,0,-1,0);
 
@@ -159,6 +139,28 @@ function drawTrack(p = p5.instance) {
   p.pop();
 };
 
+function changeRadiusSlider(i){
+  radius = Number(i);
+}
+function changeAngleSlider(i){
+  angle = Number(i);
+}
+
+var f = function(p) {
+  p.setup = function() {
+    p.createCanvas(200, 200, p.P2D);
+    p.angleMode(p.DEGREES);
+
+  };
+  p.draw = function() {
+    p.background(220);
+
+    drawFBD(p);
+
+  };
+};
+var myp5 = new p5(f, 'fbd');
+
 function drawFBD(p = p5.instance){
 
   // track
@@ -175,15 +177,13 @@ function drawFBD(p = p5.instance){
   p.strokeWeight(3);
   p.triangle(100-w/2,100-h/2,100-w/2,100+h/2,100+w/2,100+h/2);
 
-  // cart
+  //fbd
   p.push();
     p.translate(100-w/2,100-h/2);
     p.rotate(angle);
     p.translate(hyp/2,0);
 
-    const cartSwitch = document.querySelector('#cartSwitch');
-    console.log(cartSwitch.checked);
-
+    //cart
     if (cartSwitch.checked == true) {
       p.fill(255,0,0);
       p.rect(-carLength/2,-carHeight-wheelRadius,carLength,carHeight);
@@ -232,8 +232,6 @@ function drawFBD(p = p5.instance){
   p.pop();
 
 }
-
-
 
 function drawArrow(p = p5.instance, start, end, color, width, size){
   p.push();
