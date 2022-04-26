@@ -159,16 +159,6 @@ function drawTrack(p = p5.instance) {
   p.pop();
 };
 
-function changeRadiusSlider(i){
-  radius = Number(i);
-}
-function changeAngleSlider(i){
-  angle = Number(i);
-}
-function changeMassSlider(i){
-  mass = Number(i);
-}
-
 var f = function(p) {
   p.setup = function() {
     p.createCanvas(200, 200, p.P2D);
@@ -220,7 +210,7 @@ function drawFBD(p = p5.instance){
     let F_G = mass * gravity;
     let F_N = F_G * p.cos(angle);
     // mv^2/r = F_Gsin - F_fs
-    let F_fs = (F_G -F_N*p.cos(angle))/p.sin(angle);
+    let F_fs = (F_G - F_N*fcoeff*p.cos(angle))/p.sin(angle);
 
     let values = [F_G,F_N,F_fs];
     values = clamp(p,values,50);
