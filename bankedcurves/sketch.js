@@ -52,6 +52,29 @@ var t = function(p) {
 
   };
 };
+<<<<<<< HEAD
+=======
+
+function changeRadiusSlider(i){
+  radius = Number(i);
+}
+function changeAngleSlider(i){
+  angle = Number(i);
+}
+function changeFrictionSlider(i){
+  fcoeff = Number(i)/100;
+}
+function changeSpeedSlider(i){
+  speed = Number(i);
+}
+function changeGravitySlider(i){
+  gravity = Number(i);
+}
+function changeMassSlider(i){
+  mass = Number(i);
+}
+
+>>>>>>> 67f660dc8704bb06e818f4b0b2d719920cfa7ea0
 var myp5 = new p5(t, "track");
 
 
