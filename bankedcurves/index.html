@@ -38,8 +38,17 @@
                 Track Radius
               </div>
               <div class="slidecontainer">
-                <input type="range" min="0" max="200000000" value="100" class="slider" oninput="changeRadiusSlider(this.value)">
+                <input type="range" min="2" max="20" value="8" class="slider" oninput="changeRadiusSlider(this.value)">
               </div>
+              <span>
+                $r=$
+              </span>
+              <span id="radiusValue">
+                100
+              </span>
+              <span>
+                m
+              </span>
             </div>
 
             <div class="uielement">
@@ -47,32 +56,64 @@
                 Curve Angle
               </div>
               <div class="slidecontainer">
-                <input type="range" min="0" max="80" value="40" class="slider" oninput="changeAngleSlider(this.value)">
+                <input type="range" min="10" max="80" value="77" class="slider" oninput="changeAngleSlider(this.value)">
               </div>
+              <span>
+                $\theta=$
+              </span>
+              <span id="angleValue">
+                40
+              </span>
+              <span>
+                $^{\circ}$
             </div>
             <div class="uielement">
               <div>
                 Friction Coefficient
               </div>
               <div class="slidecontainer">
-                <input type="range" min="0" max="100" value="20" class="slider" oninput="changeFrictionSlider(this.value)">
+                <input type="range" min="0" max="100" value="4" class="slider" oninput="changeFrictionSlider(this.value)">
               </div>
+              <span>
+                $\mu=$
+              </span>
+              <span id="frictionValue">
+                0.2
+              </span>
             </div>
             <div class="uielement">
               <div>
                 Car Speed
               </div>
               <div class="slidecontainer">
-                <input type="range" min="10" max="200000000" value="500" class="slider" oninput="changeSpeedSlider(this.value)">
+                <input type="range" min="10" max="2000" value="20" class="slider" oninput="changeSpeedSlider(this.value)">
               </div>
+              <span>
+                $v=$
+              </span>
+              <span id="speedValue">
+                500
+              </span>
+              <span>
+                $\frac{m}{s}$
+              </span>
             </div>
             <div class="uielement">
               <div>
                 Gravity
               </div>
               <div class="slidecontainer">
-                <input type="range" min="5" max="50" value="9.8" class="slider" oninput="changeGravitySlider(this.value)">
+                <input type="range" min="50" max="500" value="98" class="slider" oninput="changeGravitySlider(this.value)">
               </div>
+              <span>
+                $g=$
+              </span>
+              <span id="gravityValue">
+                9.8
+              </span>
+              <span>
+                $\frac{m}{s^2}$
+              </span>
             </div>
             <div class="uielement">
               <div>
@@ -81,27 +122,41 @@
               <div class="slidecontainer">
                 <input type="range" min="10" max="1000" value="100" class="slider" oninput="changeMassSlider(this.value)">
               </div>
+              <span>
+                $m=$
+              </span>
+              <span id="massValue">
+                100
+              </span>
+              <span>
+                $kg$
+              </span>
             </div>
-            <div class="uielement">
-              <div>
-                Effective G-Force:
+
+          </div>
+          <div class="column">
+            <div id="ui" class="shadow round" style="background-color:#aaa">
+              <div class="uielement">
+                <div>
+                  Effective G-Force:
+                </div>
+                <div class = "inlinelatex">
+                  $$G = \frac{F_N}{mg} = $$
+                </div>
+                <div id="gforce" class = "inlinelatex">
+                  1
+                </div>
               </div>
-              <div class = "inlinelatex">
-                $$G = \frac{F_N}{mg} = $$
-              </div>
-              <div id="gforce" class = "inlinelatex">
-                1
-              </div>
-            </div>
-            <div class="uielement">
-              <div>
-                % Max Friction:
-              </div>
-              <div class = "inlinelatex">
-                $$\%F = \frac{F_fs}{\mu F_N} = $$
-              </div>
-              <div id="pfriction" class = "inlinelatex">
-                1
+              <div class="uielement">
+                <div>
+                  % Max Friction:
+                </div>
+                <div class = "inlinelatex">
+                  $$\%F = \frac{F_fs}{\mu F_N} = $$
+                </div>
+                <div id="pfriction" class = "inlinelatex">
+                  1
+                </div>
               </div>
             </div>
           </div>
