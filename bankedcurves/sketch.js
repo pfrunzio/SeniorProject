@@ -26,12 +26,12 @@ var t = function(p) {
 
     p.createCanvas(600, 500, p.WEBGL);
     trackResolution = 1;
-    angle = 40;
-    fcoeff = 0.4;
-    speed = 500;
+    angle = 77;
+    fcoeff = 0.02;
+    speed = 20;
     mass = 100;
     gravity = 9.81;
-    radius = 140;
+    radius = 8;
     trackAbove = 40;
     carHeight = 10;
     carLength = 30;
@@ -63,26 +63,32 @@ var t = function(p) {
 function changeRadiusSlider(i){
   radius = Number(i);
   changeAllDependents();
+  document.getElementById('radiusValue').innerHTML = radius;
 }
 function changeAngleSlider(i){
   angle = Number(i);
   changeAllDependents();
+  document.getElementById('angleValue').innerHTML = angle;
 }
 function changeFrictionSlider(i){
   fcoeff = Number(i)/100;
   changeAllDependents();
+  document.getElementById('frictionValue').innerHTML = fcoeff;
 }
 function changeSpeedSlider(i){
   speed = Number(i);
   changeAllDependents();
+  document.getElementById('speedValue').innerHTML = speed;
 }
 function changeGravitySlider(i){
-  gravity = Number(i);
+  gravity = Number(i)/10;
   changeAllDependents();
+  document.getElementById('gravityValue').innerHTML = gravity;
 }
 function changeMassSlider(i){
   mass = Number(i);
   changeAllDependents();
+  document.getElementById('massValue').innerHTML = mass;
 }
 
 function changeAllDependents(){
@@ -93,8 +99,9 @@ function changeAllDependents(){
   F_fs = F_N*Math.sin(ra) - F_C;
   gf = F_N / F_G;
   pf = F_fs / (fcoeff * F_N);
-  //document.getElementById('gforce').innerHTML = gf;
-  //document.getElementById('pfriction').innerHTML = pf;
+  document.getElementById('gforce').innerHTML = gf;
+  document.getElementById('pfriction').innerHTML = pf;
+
 }
 function radians(a){
   return a * Math.PI/180;
@@ -234,7 +241,7 @@ function drawFBD(p = p5.instance){
       p.circle(carLength/2-wheelRadius-2,-wheelRadius,wheelRadius*2);
     }
 
-    
+
     let values = [F_G,F_N,F_fs,F_C];
     values = clamp(p,values,50);
     // arrows
@@ -265,7 +272,7 @@ function drawFBD(p = p5.instance){
     p.textSize(16);
     p.text('Fg', 10, 30);
     p.rotate(angle);
-    
+
     drawArrow(p,p.createVector(0,0),p.createVector(values[3],0),'red',3,7); // centripetal force
 
   p.pop();
