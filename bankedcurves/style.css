@@ -75,6 +75,10 @@ td, th {
 }
 
 
+canvas {
+  display: block;
+}
+
 
 
 
