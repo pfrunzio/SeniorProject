@@ -246,40 +246,22 @@ function drawFBD(p = p5.instance){
     values = clamp(p,values,50);
     // arrows
     // positive x is down the slope, positive y is into the slope
-    drawArrow(p,p.createVector(0,0),p.createVector(0,-values[1]),'purple',3,7); //normal force
-    //label
-    p.rotate(-angle);
-    p.fill('white');
-    p.stroke('purple');
-    p.textSize(16);
-    p.text('Fn', 10, -10);
-    p.rotate(angle);
+    drawArrow(p,p.createVector(0,0),p.createVector(0,-values[1]),'purple',3,7, 'Fn'); //normal force
 
-    drawArrow(p,p.createVector(0,0),p.createVector(-values[2],0),'orange',3,7); //frictional force
-    //label
-    p.rotate(-angle);
-    p.fill('white');
-    p.stroke('orange');
-    p.textSize(16);
-    p.text('Ffs', -50, -10);
-    p.rotate(angle);
+    drawArrow(p,p.createVector(0,0),p.createVector(-values[2],0),'orange',3,7, 'Ffs'); //frictional force
 
     p.rotate(-angle);
-    drawArrow(p,p.createVector(0,0),p.createVector(0,values[0]),'green',3,7); //gravitational force
-    //label
-    p.fill('white');
-    p.stroke('green');
-    p.textSize(16);
-    p.text('Fg', 10, 30);
-    p.rotate(angle);
+    drawArrow(p,p.createVector(0,0),p.createVector(0,values[0]),'green',3,7, 'Fg'); //gravitational force
 
-    drawArrow(p,p.createVector(0,0),p.createVector(values[3],0),'red',3,7); // centripetal force
+    if (FcSwitch.checked == true) {
+      drawArrow(p,p.createVector(0,0),p.createVector(values[3],0),'red',3,7, 'Fc'); // centripetal force
+    }
 
   p.pop();
 
 }
 
-function drawArrow(p = p5.instance, start, end, color, width, size){
+function drawArrow(p = p5.instance, start, end, color, width, size, name){
   p.push();
     p.stroke(color);
     p.strokeWeight(3);
@@ -289,6 +271,10 @@ function drawArrow(p = p5.instance, start, end, color, width, size){
     p.rotate(end.heading());
     p.translate(end.mag() - size, 0);
     p.triangle(0, size/2, 0, -size/2, size, 0);
+    p.rotate(-angle);
+    p.textSize(16);
+    p.fill('white');
+    p.text(name, 10, 20);
   p.pop();
 }
 
