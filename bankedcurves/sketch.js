@@ -95,8 +95,9 @@ function changeAllDependents(){
   ra = radians(angle);
   F_G = mass * gravity;
   F_C = (mass * speed * speed)/radius;
-  F_N = (F_G * Math.cos(ra)/Math.sin(ra) + F_C)/(Math.sin(ra)+Math.cos(ra)*Math.cos(ra)/Math.sin(ra));
-  F_fs = F_N*Math.sin(ra) - F_C;
+  F_N = F_C * Math.sin(ra) + F_G * Math.cos(ra);
+  //(F_G * Math.cos(ra)/Math.sin(ra) + F_C)/(Math.sin(ra)+Math.cos(ra)*Math.cos(ra)/Math.sin(ra));
+  F_fs = F_G * Math.sin(ra) - F_C * Math.cos(ra);
   gf = F_N / F_G;
   pf = F_fs / (fcoeff * F_N);
   document.getElementById('gforce').innerHTML = gf;
@@ -196,7 +197,7 @@ function drawTrack(p = p5.instance) {
 
 var f = function(p) {
   p.setup = function() {
-    p.createCanvas(200, 200, p.P2D);
+    p.createCanvas(250, 200, p.P2D);
     p.angleMode(p.DEGREES);
 
   };
@@ -243,18 +244,18 @@ function drawFBD(p = p5.instance){
 
 
     let values = [F_G,F_N,F_fs,F_C];
-    values = clamp(p,values,50);
+    values = clamp(p,values,90);
     // arrows
     // positive x is down the slope, positive y is into the slope
-    drawArrow(p,p.createVector(0,0),p.createVector(0,-values[1]),'purple',3,7, 'Fn'); //normal force
+    drawArrow(p,p.createVector(0,0),p.createVector(0,-values[1]),'purple',1,3,'Fn'); //normal force
 
-    drawArrow(p,p.createVector(0,0),p.createVector(-values[2],0),'orange',3,7, 'Ffs'); //frictional force
+    drawArrow(p,p.createVector(0,0),p.createVector(-values[2],0),'orange',1,3,'Ffs'); //frictional force
 
     p.rotate(-angle);
-    drawArrow(p,p.createVector(0,0),p.createVector(0,values[0]),'green',3,7, 'Fg'); //gravitational force
+    drawArrow(p,p.createVector(0,0),p.createVector(0,values[0]),'green',1,3,'Fg'); //gravitational force
 
     if (FcSwitch.checked == true) {
-      drawArrow(p,p.createVector(0,0),p.createVector(values[3],0),'red',3,7, 'Fc'); // centripetal force
+      drawArrow(p,p.createVector(0,0),p.createVector(values[3],0),'red',1,3,'Fc'); // centripetal force
     }
 
   p.pop();
