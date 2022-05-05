@@ -197,7 +197,7 @@ function drawTrack(p = p5.instance) {
 
 var f = function(p) {
   p.setup = function() {
-    p.createCanvas(200, 200, p.P2D);
+    p.createCanvas(250, 200, p.P2D);
     p.angleMode(p.DEGREES);
 
   };
@@ -247,6 +247,7 @@ function drawFBD(p = p5.instance){
     values = clamp(p,values,90);
     // arrows
     // positive x is down the slope, positive y is into the slope
+<<<<<<< HEAD
     drawArrow(p,p.createVector(0,0),p.createVector(0,-values[1]),'purple',1,3); //normal force
     //label
     p.rotate(-angle);
@@ -275,12 +276,24 @@ function drawFBD(p = p5.instance){
 
     drawArrow(p,p.createVector(0,0),p.createVector(values[3],0),'red',1,3); // centripetal force
 
+=======
+    drawArrow(p,p.createVector(0,0),p.createVector(0,-values[1]),'purple',1,3,'Fn'); //normal force
+
+    drawArrow(p,p.createVector(0,0),p.createVector(-values[2],0),'orange',1,3,'Ffs'); //frictional force
+
+    p.rotate(-angle);
+    drawArrow(p,p.createVector(0,0),p.createVector(0,values[0]),'green',1,3,'Fg'); //gravitational force
+
+    if (FcSwitch.checked == true) {
+      drawArrow(p,p.createVector(0,0),p.createVector(values[3],0),'red',1,3,'Fc'); // centripetal force
+    }
+>>>>>>> 14243f26dc2e23e5552fa74035c4a5179f36c2a5
 
   p.pop();
 
 }
 
-function drawArrow(p = p5.instance, start, end, color, width, size){
+function drawArrow(p = p5.instance, start, end, color, width, size, name){
   p.push();
     p.stroke(color);
     p.strokeWeight(3);
@@ -290,6 +303,10 @@ function drawArrow(p = p5.instance, start, end, color, width, size){
     p.rotate(end.heading());
     p.translate(end.mag() - size, 0);
     p.triangle(0, size/2, 0, -size/2, size, 0);
+    p.rotate(-angle);
+    p.textSize(16);
+    p.fill('white');
+    p.text(name, 10, 20);
   p.pop();
 }
 
