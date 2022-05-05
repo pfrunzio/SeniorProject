@@ -58,7 +58,8 @@ var t = function(p) {
       'https://thumbs.dreamstime.com/b/k-seamless-sand-texture-surface-high-resolution-155924341.jpg'
     );
 
-    cameraMode = 0;
+    cameraMode = 1
+    //p.frustum(50,-50,50,-50,40,900);
   };
   p.draw = function() {
     p.background(220);
@@ -146,11 +147,15 @@ function drawTrack(p = p5.instance) {
       p.camera(0,-200,-150,0,0,0,0,1,0);
     }
     else if (cameraMode == 1){
-      p.camera(
+      /*p.camera(
         p.cos(camPos%360)*(effectiveRadius-20),-trackAbove*p.sin(angle)/2,-p.sin(camPos%360)*(effectiveRadius-20),
         p.cos((carPos)%360)*(effectiveRadius-30),-trackAbove*p.sin(angle)/2,-p.sin((carPos)%360)*(effectiveRadius-30),
         p.sin(angle)*p.cos(camPos%360)*10,p.cos(angle)*10,-p.sin(angle)*p.sin(camPos%360)*10
-      );
+      );*/
+      p.camera(
+        p.cos(camPos%360)*(effectiveRadius-5),-trackAbove*p.sin(angle)/2,-p.sin(camPos%360)*(effectiveRadius-5),
+        p.cos(camPos%360)*(effectiveRadius-5) - p.sin(camPos%360),-trackAbove*p.sin(angle)/2,-p.sin(camPos%360)*(effectiveRadius-5) + p.cos(camPos%360),
+        0,1,0);
     }
 
     //p.ambientLight(255,255,255);
