@@ -19,6 +19,11 @@ var F_C;
 var F_fs;
 var gf; //gforce
 var pf; //percent friction
+var grassTexture;
+var roadTexture;
+var sandTexture;
+var environmentMode; // 0 = dirt, 1 = sand
+var cameraMode; // 0 = overhead, 1 = behind car
 
 var t = function(p) {
   p.setup = function() {
@@ -28,11 +33,11 @@ var t = function(p) {
     trackResolution = 1;
     angle = 77;
     fcoeff = 0.02;
-    speed = 20;
+    speed = 1;
     mass = 100;
     gravity = 9.81;
     radius = 8;
-    trackAbove = 40;
+    trackAbove = 80;
     carHeight = 10;
     carLength = 30;
     carWidth = 15;
@@ -40,6 +45,20 @@ var t = function(p) {
     wheelRadius = 5;
     changeAllDependents();
     p.angleMode(p.DEGREES);
+
+    environmentMode = 1;
+    // setup textures
+    grassTexture = p.loadImage(
+      'http://www.textures4photoshop.com/tex/thumbs/free-seamless-grass-texture-26.jpg'
+    );
+    roadTexture = p.loadImage(
+      'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/c2805822-5f5c-4ac4-983f-d1e57ebcbe8a/dbuyn4y-7ded5e1d-acb6-4399-aa5f-9fb6db58232a.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2MyODA1ODIyLTVmNWMtNGFjNC05ODNmLWQxZTU3ZWJjYmU4YVwvZGJ1eW40eS03ZGVkNWUxZC1hY2I2LTQzOTktYWE1Zi05ZmI2ZGI1ODIzMmEuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.D_agegq4Cxi1beRs5g-HNIXzPkVeEyXX3Xm_5Y94ZhY'
+    );
+    sandTexture = p.loadImage(
+      'https://thumbs.dreamstime.com/b/k-seamless-sand-texture-surface-high-resolution-155924341.jpg'
+    );
+
+    cameraMode = 0;
   };
   p.draw = function() {
     p.background(220);
@@ -112,15 +131,51 @@ var myp5 = new p5(t, "track");
 
 
 function drawTrack(p = p5.instance) {
+  effectiveRadius = radius * 10;
   //radius += 0.5;
   p.push(); // camera
-    //p.translate(-200,-100,0);
-    p.rotateZ(0*p.frameCount*0.5);
-    p.rotateX(-50);
-    p.rotateY(0);
-    p.translate(0,-50,0);
+    /*p.translate(0,-50,0);
+    p.translate(0,-trackAbove*p.sin(angle)/2,0);
+    p.rotateY(carPos%360);
+    p.translate(effectiveRadius,0,0);
+    p.rotateZ(-angle);
+    p.translate(0,-carHeight/2-1-wheelRadius,0);
+    */
+    let camPos = carPos-4;
+    if (cameraMode == 0){
+      p.camera(0,-200,-150,0,0,0,0,1,0);
+    }
+    else if (cameraMode == 1){
+      p.camera(
+        p.cos(camPos%360)*(effectiveRadius-20),-trackAbove*p.sin(angle)/2,-p.sin(camPos%360)*(effectiveRadius-20),
+        p.cos((carPos)%360)*(effectiveRadius-30),-trackAbove*p.sin(angle)/2,-p.sin((carPos)%360)*(effectiveRadius-30),
+        p.sin(angle)*p.cos(camPos%360)*10,p.cos(angle)*10,-p.sin(angle)*p.sin(camPos%360)*10
+      );
+    }
 
+    //p.ambientLight(255,255,255);
     p.directionalLight(160,160,160,0,-1,0);
+
+
+    p.fill(255,0,0);
+    p.push();
+      p.translate(p.cos(camPos%360)*(effectiveRadius-10),-trackAbove*p.sin(angle)/2,-p.sin(camPos%360)*(effectiveRadius-10));
+      p.sphere(1);
+    p.pop();
+    p.fill(0,255,0);
+    p.push();
+      p.translate(p.cos((carPos)%360)*(effectiveRadius-10),-trackAbove*p.sin(angle)/2-1,-p.sin((carPos)%360)*(effectiveRadius-10));
+      p.box(1);
+    p.pop();
+    p.fill(0,0,255);
+    p.push();
+      p.translate(-p.sin(angle)*p.cos(camPos%360)*10,-p.cos(angle)*10,+p.sin(angle)*p.sin(camPos%360)*10);
+      p.sphere(1);
+    p.pop();
+
+    //p.translate(-200,-100,0);
+
+
 
     p.fill(100);
     p.circle(0,0,0,0,0);
@@ -129,8 +184,9 @@ function drawTrack(p = p5.instance) {
 
 
     p.push(); // track
+      p.texture(roadTexture);
       let habove = trackAbove*p.sin(angle);
-      let bigradius = (trackAbove/2)*p.sin(90-angle) + radius;
+      let bigradius = (trackAbove/2)*p.sin(90-angle) + effectiveRadius;
       let h = bigradius * (p.sin(angle)/p.sin(90-angle));
       p.translate(0,h/2-habove,0);
       p.cone(bigradius,h,64,16,false);
@@ -141,21 +197,36 @@ function drawTrack(p = p5.instance) {
     p.pop();
 
     p.push(); // ground
-      p.fill(255);
+      p.translate(-1100,0,1100);
+      if (environmentMode == 0){
+        p.texture(grassTexture);
+      }
+      else if (environmentMode == 1){
+        p.texture(sandTexture);
+      }
       p.rotateX(90);
-      p.plane(2000);
-    p.pop();
+      for (let i = 0; i < 10; i++){
+        p.translate(0,-2000,0);
+        p.translate(200,0,0);
+        for (let z = 0; z < 10; z++){
+          p.translate(0,200,0);
+          p.plane(200);
+        }
+      }
 
+
+    p.pop();
+    //drawCactus(p,40,5,-5,50);
     p.push(); // car
 
       p.translate(0,-habove/2,0);
       p.rotateY(carPos%360);
 
-
+      /*
       p.push(); // car body
         //rotateZ(angle);
         p.stroke(0);
-        p.translate(radius,0,0);
+        p.translate(effectiveRadius,0,0);
         p.rotateZ(-angle);
         p.translate(0,-carHeight/2-1-wheelRadius,0);
         //translate(radius*sin(angle),-radius*sin(90-angle),0);
@@ -165,7 +236,7 @@ function drawTrack(p = p5.instance) {
         p.box(carWidth,carHeight,carLength);
         p.fill(200);
         p.strokeWeight(1);
-        var rot = -(((radius*(carPos*p.PI/180))%(2*p.PI*wheelRadius))/(2*p.PI*wheelRadius))*360;
+        var rot = -(((effectiveRadius*(carPos*p.PI/180))%(2*p.PI*wheelRadius))/(2*p.PI*wheelRadius))*360;
         p.push(); // wheel 1
           p.translate(carWidth/2,carHeight/2,carLength/2-wheelRadius-2);
           p.rotateZ(90);
@@ -191,10 +262,47 @@ function drawTrack(p = p5.instance) {
           p.cylinder(wheelRadius,2,8,4,true,true);
         p.pop();
       p.pop();
+      */
     p.pop();
   p.pop();
 };
 
+function drawCactus(p = p5.instance, size, arm1, arm2, rotation){
+  p.push();
+    p.rotateY(rotation);
+    p.translate(0,-size/2,0);
+    p.fill(9,145,11);
+    p.cylinder(size/8,size);
+    p.push();
+      p.translate(0,-size/2)
+      p.sphere(size/8);
+    p.pop();
+    p.push();
+      p.translate(-size/8,arm1,0);
+      p.rotateZ(90);
+      p.cylinder(size/12,size/4);
+      p.rotateZ(-90);
+      p.translate(-size/8,0,0);
+      p.sphere(size/12);
+      p.translate(0,-size/6,0);
+      p.cylinder(size/12,size/3);
+      p.translate(0,-size/6,0);
+      p.sphere(size/12);
+    p.pop();
+    p.push();
+      p.translate(size/8,arm2,0);
+      p.rotateZ(90);
+      p.cylinder(size/12,size/4);
+      p.rotateZ(-90);
+      p.translate(size/8,0,0);
+      p.sphere(size/12);
+      p.translate(0,-size/6,0);
+      p.cylinder(size/12,size/3);
+      p.translate(0,-size/6,0);
+      p.sphere(size/12);
+    p.pop();
+  p.pop();
+}
 var f = function(p) {
   p.setup = function() {
     p.createCanvas(250, 200, p.P2D);
@@ -247,14 +355,13 @@ function drawFBD(p = p5.instance){
     values = clamp(p,values,90);
     // arrows
     // positive x is down the slope, positive y is into the slope
-<<<<<<< HEAD
     drawArrow(p,p.createVector(0,0),p.createVector(0,-values[1]),'purple',1,3); //normal force
     //label
     p.rotate(-angle);
     p.fill('white');
     p.stroke('purple');
     p.textSize(16);
-    p.text('Fn', 10, -10);
+    p.text('Fn', 120, -60);
     p.rotate(angle);
 
     drawArrow(p,p.createVector(0,0),p.createVector(-values[2],0),'orange',1,3); //frictional force
@@ -263,7 +370,7 @@ function drawFBD(p = p5.instance){
     p.fill('white');
     p.stroke('orange');
     p.textSize(16);
-    p.text('Ffs', -50, -10);
+    p.text('Ffs', 120, -80);
     p.rotate(angle);
 
     p.rotate(-angle);
@@ -272,22 +379,10 @@ function drawFBD(p = p5.instance){
     p.fill('white');
     p.stroke('green');
     p.textSize(16);
-    p.text('Fg', 10, 30);
+    p.text('Fg', 120, -40);
 
     drawArrow(p,p.createVector(0,0),p.createVector(values[3],0),'red',1,3); // centripetal force
 
-=======
-    drawArrow(p,p.createVector(0,0),p.createVector(0,-values[1]),'purple',1,3,'Fn'); //normal force
-
-    drawArrow(p,p.createVector(0,0),p.createVector(-values[2],0),'orange',1,3,'Ffs'); //frictional force
-
-    p.rotate(-angle);
-    drawArrow(p,p.createVector(0,0),p.createVector(0,values[0]),'green',1,3,'Fg'); //gravitational force
-
-    if (FcSwitch.checked == true) {
-      drawArrow(p,p.createVector(0,0),p.createVector(values[3],0),'red',1,3,'Fc'); // centripetal force
-    }
->>>>>>> 14243f26dc2e23e5552fa74035c4a5179f36c2a5
 
   p.pop();
 
