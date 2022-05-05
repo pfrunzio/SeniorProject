@@ -22,7 +22,7 @@ var pf; //percent friction
 var grassTexture;
 var roadTexture;
 var sandTexture;
-var environmentMode; // 0 = dirt, 1 = sand
+var environmentMode; // 0 = dirt, 1 = sand, 2 = moon, 3 = hell, 4 = urban
 var cameraMode; // 0 = overhead, 1 = behind car
 
 var t = function(p) {
@@ -46,7 +46,7 @@ var t = function(p) {
     changeAllDependents();
     p.angleMode(p.DEGREES);
 
-    environmentMode = 1;
+    environmentMode = 0;
     // setup textures
     grassTexture = p.loadImage(
       'http://www.textures4photoshop.com/tex/thumbs/free-seamless-grass-texture-26.jpg'
@@ -58,7 +58,7 @@ var t = function(p) {
       'https://thumbs.dreamstime.com/b/k-seamless-sand-texture-surface-high-resolution-155924341.jpg'
     );
 
-    cameraMode = 1
+    cameraMode = 0;
     //p.frustum(50,-50,50,-50,40,900);
   };
   p.draw = function() {
@@ -153,9 +153,9 @@ function drawTrack(p = p5.instance) {
         p.sin(angle)*p.cos(camPos%360)*10,p.cos(angle)*10,-p.sin(angle)*p.sin(camPos%360)*10
       );*/
       p.camera(
-        p.cos(camPos%360)*(effectiveRadius-5),-trackAbove*p.sin(angle)/2,-p.sin(camPos%360)*(effectiveRadius-5),
-        p.cos(camPos%360)*(effectiveRadius-5) - p.sin(camPos%360),-trackAbove*p.sin(angle)/2,-p.sin(camPos%360)*(effectiveRadius-5) + p.cos(camPos%360),
-        0,1,0);
+        p.cos(camPos%360)*(effectiveRadius-10),-trackAbove*p.sin(angle)/2,-p.sin(camPos%360)*(effectiveRadius-10),
+        p.cos(camPos%360)*(effectiveRadius-10) - p.sin(camPos%360),-trackAbove*p.sin(angle)/2,-p.sin(camPos%360)*(effectiveRadius-10) - p.cos(camPos%360),
+        p.cos(camPos%360),p.cos(angle)/p.sin(angle),-p.sin(camPos%360));
     }
 
     //p.ambientLight(255,255,255);
@@ -221,13 +221,13 @@ function drawTrack(p = p5.instance) {
 
 
     p.pop();
-    //drawCactus(p,40,5,-5,50);
+    drawCactus(p,20,2,-2,p.frameCount);
     p.push(); // car
 
       p.translate(0,-habove/2,0);
       p.rotateY(carPos%360);
 
-      /*
+
       p.push(); // car body
         //rotateZ(angle);
         p.stroke(0);
@@ -267,7 +267,7 @@ function drawTrack(p = p5.instance) {
           p.cylinder(wheelRadius,2,8,4,true,true);
         p.pop();
       p.pop();
-      */
+
     p.pop();
   p.pop();
 };
