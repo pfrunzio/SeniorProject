@@ -37,7 +37,7 @@ var t = function(p) {
     mass = 100;
     gravity = 9.81;
     radius = 8;
-    trackAbove = 80;
+    trackAbove = 40;
     carHeight = 10;
     carLength = 30;
     carWidth = 15;
@@ -58,7 +58,7 @@ var t = function(p) {
       'https://thumbs.dreamstime.com/b/k-seamless-sand-texture-surface-high-resolution-155924341.jpg'
     );
 
-    cameraMode = 0;
+    cameraMode = 1;
     //p.frustum(50,-50,50,-50,40,900);
   };
   p.draw = function() {
@@ -152,9 +152,11 @@ function drawTrack(p = p5.instance) {
         p.cos((carPos)%360)*(effectiveRadius-30),-trackAbove*p.sin(angle)/2,-p.sin((carPos)%360)*(effectiveRadius-30),
         p.sin(angle)*p.cos(camPos%360)*10,p.cos(angle)*10,-p.sin(angle)*p.sin(camPos%360)*10
       );*/
+      let away = 20;
+      let away2 = 5;
       p.camera(
-        p.cos(camPos%360)*(effectiveRadius-10),-trackAbove*p.sin(angle)/2,-p.sin(camPos%360)*(effectiveRadius-10),
-        p.cos(camPos%360)*(effectiveRadius-10) - p.sin(camPos%360),-trackAbove*p.sin(angle)/2,-p.sin(camPos%360)*(effectiveRadius-10) - p.cos(camPos%360),
+        p.cos(camPos%360)*(effectiveRadius-10) + p.cos(camPos%360) * away,-trackAbove*p.sin(angle)/2 + p.cos(angle)/p.sin(angle) * away,-p.sin(camPos%360)*(effectiveRadius-10) -p.sin(camPos%360) * away,
+        p.cos(carPos%360)*(effectiveRadius-10) + p.cos(carPos%360) * away2,-trackAbove*p.sin(angle)/2 + p.cos(angle)/p.sin(angle) * away2,-p.sin(carPos%360)*(effectiveRadius-10) -p.sin(carPos%360) * away2,
         p.cos(camPos%360),p.cos(angle)/p.sin(angle),-p.sin(camPos%360));
     }
 
