@@ -22,8 +22,18 @@ var pf; //percent friction
 var grassTexture;
 var roadTexture;
 var sandTexture;
+var nightTexture;
 var environmentMode; // 0 = dirt, 1 = sand, 2 = moon, 3 = hell, 4 = urban
 var cameraMode; // 0 = overhead, 1 = behind car
+var cacti;
+
+class Cactus{
+  constructor(x,z,height){
+    this.x = x;
+    this.z = z;
+    this.height = height;
+  }
+}
 
 var t = function(p) {
   p.setup = function() {
@@ -57,9 +67,17 @@ var t = function(p) {
     sandTexture = p.loadImage(
       'https://thumbs.dreamstime.com/b/k-seamless-sand-texture-surface-high-resolution-155924341.jpg'
     );
+    nightTexture = p.loadImage(
+      'https://images.unsplash.com/photo-1475274047050-1d0c0975c63e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80'
+    );
 
     cameraMode = 0;
-      p.frustum(-5,5,5,-5,10,900);
+      p.frustum(-5,5,5,-5,10,800);
+
+    cacti = [];
+    for (let i = 0; i < 10; i++){
+      cacti.push(p.random(-50,50),p.random(-50,50),p.random(10,30));
+    }
   };
   p.draw = function() {
     p.background(220);
@@ -150,7 +168,9 @@ function drawTrack(p = p5.instance) {
     p.translate(0,-carHeight/2-1-wheelRadius,0);
     */
     if (cameraMode == 0){
+      p.plane(1000);
       p.camera(0,-200,-150,0,0,0,0,1,0);
+      //skybox(p,0,-200,-150,0,0,0,0,1,0);
     }
     else if (cameraMode == 1){
       /*p.camera(
@@ -158,6 +178,13 @@ function drawTrack(p = p5.instance) {
         p.cos((carPos)%360)*(effectiveRadius-30),-trackAbove*p.sin(angle)/2,-p.sin((carPos)%360)*(effectiveRadius-30),
         p.sin(angle)*p.cos(camPos%360)*10,p.cos(angle)*10,-p.sin(angle)*p.sin(camPos%360)*10
       );*/
+      p.noStroke();
+      p.fill(0);
+      p.texture(nightTexture);
+      p.plane(1000);
+
+
+
       let behind = 80;
       let above1 = 35;
       let above2 = 20;
@@ -248,8 +275,15 @@ function drawTrack(p = p5.instance) {
       }
 
 
+
     p.pop();
-    drawCactus(p,20,2,-2,p.frameCount);
+    for (let i = 0; i < cacti.length; i++){
+      p.pop();
+        p.translate(cacti[i].x,0,cacti[i].z);
+        drawCactus(p,cacti[i].height,2,-2,0);
+      p.push();
+    }
+    //drawCactus(p,20,2,-2,p.frameCount);
     p.push(); // car
 
       p.translate(0,-habove/2,0);
@@ -299,7 +333,9 @@ function drawTrack(p = p5.instance) {
     p.pop();
   p.pop();
 };
+function skybox(p = p5.instance,x,y,z,hx,hy,hz,ux,uy,uz){
 
+}
 function drawCactus(p = p5.instance, size, arm1, arm2, rotation){
   p.push();
     p.rotateY(rotation);
