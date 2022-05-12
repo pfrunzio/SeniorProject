@@ -394,7 +394,7 @@ function drawFBD(p = p5.instance){
     p.fill('white');
     p.stroke('purple');
     p.textSize(16);
-    p.text('Fn', 120, -60);
+    p.text('FN', 120, -60);
     p.rotate(angle);
 
     drawArrow(p,p.createVector(0,0),p.createVector(-values[2],0),'orange',1,3); //frictional force
