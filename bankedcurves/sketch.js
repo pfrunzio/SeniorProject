@@ -388,8 +388,9 @@ function drawFBD(p = p5.instance){
     p.textSize(16);
     p.text('Fg', 120, -40);
 
-    drawArrow(p,p.createVector(0,0),p.createVector(values[3],0),'red',1,3); // centripetal force
-
+    if (FcSwitch.checked == true) {
+      drawArrow(p,p.createVector(0,0),p.createVector(values[3],0),'red',1,3); // centripetal force
+    }
 
   p.pop();
 
