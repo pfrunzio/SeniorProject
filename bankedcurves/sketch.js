@@ -58,7 +58,7 @@ var t = function(p) {
       'https://thumbs.dreamstime.com/b/k-seamless-sand-texture-surface-high-resolution-155924341.jpg'
     );
 
-    cameraMode = 1;
+    cameraMode = 0;
       p.frustum(-5,5,5,-5,10,900);
   };
   p.draw = function() {
@@ -132,6 +132,13 @@ var myp5 = new p5(t, "track");
 
 
 function drawTrack(p = p5.instance) {
+  if (cameraPOV.checked == true) {
+    cameraMode = 1;
+  }
+  else {
+    cameraMode = 0;
+  }
+
   effectiveRadius = radius * 10;
   //radius += 0.5;
   p.push(); // camera

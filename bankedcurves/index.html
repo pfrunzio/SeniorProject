@@ -30,8 +30,18 @@
           <div id="track" class="shadow"></div>
           <div id="ui" class="shadow round" style="background-color:#aaa">
             <div class="uielement">
-              BUTTON
-            </div>
+              <div class="row">
+                <div class="column">
+                  <label class="switch">
+                    <input type="checkbox" id="cameraPOV" name="camera" value="true">
+                    <div class="s round"></div>
+                  </label>
+                </div>
+                <div class="column">
+                  Camera POV
+                </div>
+              </div>
+          </div>
           </div>
         </div>
 
@@ -62,7 +72,7 @@
                 Curve Angle
               </div>
               <div class="slidecontainer">
-                <input type="range" min="10" max="70  " value="77" class="slider" oninput="changeAngleSlider(this.value)">
+                <input type="range" min="10" max="70" value="60" class="slider" oninput="changeAngleSlider(this.value)">
               </div>
               <span>
                 $\theta=$
