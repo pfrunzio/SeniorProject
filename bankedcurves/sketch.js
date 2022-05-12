@@ -59,7 +59,7 @@ var t = function(p) {
     );
 
     cameraMode = 1;
-    //p.frustum(50,-50,50,-50,40,900);
+      p.frustum(-5,5,5,-5,10,900);
   };
   p.draw = function() {
     p.background(220);
@@ -142,7 +142,6 @@ function drawTrack(p = p5.instance) {
     p.rotateZ(-angle);
     p.translate(0,-carHeight/2-1-wheelRadius,0);
     */
-    let camPos = carPos-4;
     if (cameraMode == 0){
       p.camera(0,-200,-150,0,0,0,0,1,0);
     }
@@ -152,19 +151,38 @@ function drawTrack(p = p5.instance) {
         p.cos((carPos)%360)*(effectiveRadius-30),-trackAbove*p.sin(angle)/2,-p.sin((carPos)%360)*(effectiveRadius-30),
         p.sin(angle)*p.cos(camPos%360)*10,p.cos(angle)*10,-p.sin(angle)*p.sin(camPos%360)*10
       );*/
-      let away = 20;
-      let away2 = 5;
-      p.camera(
-        p.cos(camPos%360)*(effectiveRadius-10) + p.cos(camPos%360) * away,-trackAbove*p.sin(angle)/2 + p.cos(angle)/p.sin(angle) * away,-p.sin(camPos%360)*(effectiveRadius-10) -p.sin(camPos%360) * away,
-        p.cos(carPos%360)*(effectiveRadius-10) + p.cos(carPos%360) * away2,-trackAbove*p.sin(angle)/2 + p.cos(angle)/p.sin(angle) * away2,-p.sin(carPos%360)*(effectiveRadius-10) -p.sin(carPos%360) * away2,
-        p.cos(camPos%360),p.cos(angle)/p.sin(angle),-p.sin(camPos%360));
+      let behind = 80;
+      let above1 = 35;
+      let above2 = 20;
+
+      let carx = p.cos(carPos%360)*effectiveRadius;
+      let cary = -trackAbove*p.sin(angle)/2;
+      let carz = -p.sin(carPos%360)*effectiveRadius;
+
+      let forwardx = -p.sin(carPos%360);
+      let forwardy = 0;
+      let forwardz = -p.cos(carPos%360);
+
+      let awayx = -p.cos(carPos%360) * p.sin(angle);
+      let awayy = -p.cos(angle);
+      let awayz = p.sin(carPos%360) * p.sin(angle);
+
+      let finalx = carx - forwardx * behind + awayx * above1;
+      let finaly = cary - forwardy * behind + awayy * above1;
+      let finalz = carz - forwardz * behind + awayz * above1;
+
+      let headingx = carx + awayx * above2;
+      let headingy = cary + awayy * above2;
+      let headingz = carz + awayz * above2;
+
+      p.camera(finalx,finaly,finalz,headingx,headingy,headingz,-awayx,-awayy,-awayz);
     }
 
     //p.ambientLight(255,255,255);
     p.directionalLight(160,160,160,0,-1,0);
 
 
-    p.fill(255,0,0);
+    /*p.fill(255,0,0);
     p.push();
       p.translate(p.cos(camPos%360)*(effectiveRadius-10),-trackAbove*p.sin(angle)/2,-p.sin(camPos%360)*(effectiveRadius-10));
       p.sphere(1);
@@ -179,6 +197,7 @@ function drawTrack(p = p5.instance) {
       p.translate(-p.sin(angle)*p.cos(camPos%360)*10,-p.cos(angle)*10,+p.sin(angle)*p.sin(camPos%360)*10);
       p.sphere(1);
     p.pop();
+    */
 
     //p.translate(-200,-100,0);
 
