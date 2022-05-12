@@ -28,6 +28,9 @@ var cameraMode; // 0 = overhead, 1 = behind car
 var cacti;
 
 class Cactus{
+  x;
+  z;
+  height;
   constructor(x,z,height){
     this.x = x;
     this.z = z;
@@ -76,7 +79,7 @@ var t = function(p) {
 
     cacti = [];
     for (let i = 0; i < 10; i++){
-      cacti.push(p.random(-50,50),p.random(-50,50),p.random(10,30));
+      cacti.push(new Cactus(p.random(-200,200),p.random(-200,200),p.random(10,30)));
     }
   };
   p.draw = function() {
@@ -278,10 +281,10 @@ function drawTrack(p = p5.instance) {
 
     p.pop();
     for (let i = 0; i < cacti.length; i++){
-      p.pop();
+      p.push();
         p.translate(cacti[i].x,0,cacti[i].z);
         drawCactus(p,cacti[i].height,2,-2,0);
-      p.push();
+      p.pop();
     }
     //drawCactus(p,20,2,-2,p.frameCount);
     p.push(); // car
