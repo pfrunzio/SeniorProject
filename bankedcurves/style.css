@@ -35,6 +35,7 @@ td, th {
 }
 .uielement {
   margin: 10px;
+  width: 130px;
 }
 .row {
   display: table;
@@ -72,6 +73,11 @@ td, th {
 
 .round {
     border-radius: 16px;
+}
+
+
+.num {
+  width:40px;
 }
 
 

@@ -104,32 +104,39 @@ var t = function(p) {
 function changeRadiusSlider(i){
   radius = Number(i);
   changeAllDependents();
-  document.getElementById('radiusValue').innerHTML = radius;
+  document.getElementById('radiusSlider').value = radius;
+  document.getElementById('radiusNum').value = radius;
 }
+
 function changeAngleSlider(i){
   angle = Number(i);
   changeAllDependents();
-  document.getElementById('angleValue').innerHTML = angle;
+  document.getElementById('angleSlider').value = angle;
+  document.getElementById('angleNum').value = angle;
 }
 function changeFrictionSlider(i){
-  fcoeff = Number(i)/100;
+  fcoeff = Number(i);
   changeAllDependents();
-  document.getElementById('frictionValue').innerHTML = fcoeff;
+  document.getElementById('frictionSlider').value = fcoeff;
+  document.getElementById('frictionNum').value = fcoeff;
 }
 function changeSpeedSlider(i){
   speed = Number(i);
   changeAllDependents();
-  document.getElementById('speedValue').innerHTML = speed;
+  document.getElementById('speedSlider').value = speed;
+  document.getElementById('speedNum').value = speed;
 }
 function changeGravitySlider(i){
-  gravity = Number(i)/10;
+  gravity = Number(i);
   changeAllDependents();
-  document.getElementById('gravityValue').innerHTML = gravity;
+  document.getElementById('gravitySlider').value = gravity;
+  document.getElementById('gravityNum').value = gravity;
 }
 function changeMassSlider(i){
   mass = Number(i);
   changeAllDependents();
-  document.getElementById('massValue').innerHTML = mass;
+  document.getElementById('massSlider').value = mass;
+  document.getElementById('massNum').value = mass;
 }
 
 function changeAllDependents(){
