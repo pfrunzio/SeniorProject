@@ -59,7 +59,7 @@ var t = function(p) {
     changeAllDependents();
     p.angleMode(p.DEGREES);
 
-    environmentMode = 0;
+    environmentMode = 1;
     // setup textures
     grassTexture = p.loadImage(
       'http://www.textures4photoshop.com/tex/thumbs/free-seamless-grass-texture-26.jpg'
@@ -72,6 +72,9 @@ var t = function(p) {
     );
     nightTexture = p.loadImage(
       'https://images.unsplash.com/photo-1475274047050-1d0c0975c63e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80'
+    );
+    dayTexture = p.loadImage(
+      'https://media.istockphoto.com/photos/blue-sky-with-close-up-white-fluffy-tiny-clouds-background-and-picture-id1148851197?b=1&k=20&m=1148851197&s=170667a&w=0&h=IcfH92jxtpjVkQbatmPpa4PHHbcnX0XcsQckRXKN_OU='
     );
 
     cameraMode = 0;
@@ -87,7 +90,12 @@ var t = function(p) {
     let locX = p.mouseX - p.height / 2;
     let locY = p.mouseY - p.width / 2;
 
-    p.ambientLight(140);
+    if (environmentMode == 0){
+      p.ambientLight(140);
+    }
+    else if (environmentMode == 1 || environmentMode == 2){
+      p.ambientLight(200);
+    }
     //pointLight(2550, 2550, 2550, 0, 0, -1*frameCount)
 
     drawTrack(p);
@@ -159,6 +167,7 @@ function changePOV(pov){
   if (pov == "abovePOV") {
     document.getElementById('behindPOV').checked = false;
     cameraMode = 0;
+
   }
   if (pov == "behindPOV"){
     document.getElementById('abovePOV').checked = false;
@@ -182,7 +191,7 @@ function drawTrack(p = p5.instance) {
     p.translate(0,-carHeight/2-1-wheelRadius,0);
     */
     if (cameraMode == 0){
-      p.camera(0,-200 * radius/8,-150 * radius/8,0,0,0,0,1,0);
+      p.camera(0,-200 * radius/12 - 100,-150 * radius/12 - 75,0,radius*3,0,0,1,0);
       //skybox(p,0,-200,-150,0,0,0,0,1,0);
     }
     else if (cameraMode == 1){
@@ -193,10 +202,16 @@ function drawTrack(p = p5.instance) {
       );*/
       p.noStroke();
       p.fill(0);
-      p.texture(nightTexture);
+      if (environmentMode == 0){
+        p.texture(nightTexture);
+      }
+      else if (environmentMode == 1 || environmentMode == 2){
+        p.texture(dayTexture);
+      }
+      p.push();
+      p.translate(0,0,-100);
       p.plane(1000);
-
-
+      p.pop();
 
       let behind = 80;
       let above1 = 35;
@@ -277,6 +292,9 @@ function drawTrack(p = p5.instance) {
       else if (environmentMode == 1){
         p.texture(sandTexture);
       }
+      else if (environmentMode == 2){
+        p.texture(grassTexture);
+      }
       p.rotateX(90);
       for (let i = 0; i < 10; i++){
         p.translate(0,-2000,0);
@@ -293,7 +311,9 @@ function drawTrack(p = p5.instance) {
     for (let i = 0; i < cacti.length; i++){
       p.push();
         p.translate(cacti[i].x,0,cacti[i].z);
-        drawCactus(p,cacti[i].height,2,-2,0);
+        if (objectDrawn(p,10,p.sqrt(cacti[i].x*cacti[i].x+cacti[i].z*cacti[i].z),(bigradius-effectiveRadius),effectiveRadius)){
+          drawCactus(p,cacti[i].height,2,-2,0);
+        }
       p.pop();
     }
     //drawCactus(p,20,2,-2,p.frameCount);
@@ -471,6 +491,12 @@ function drawFBD(p = p5.instance){
 
 }
 
+function objectDrawn(p = p5.instance, radius, distance, width,fullrad){
+  if (distance + radius < fullrad - width || distance - radius > fullrad + width){
+    return true;
+  }
+  return false;
+}
 function drawArrow(p = p5.instance, start, end, color, width, size, name){
   p.push();
     p.stroke(color);
