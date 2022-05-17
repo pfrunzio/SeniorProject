@@ -75,7 +75,7 @@ var t = function(p) {
     );
 
     cameraMode = 0;
-      p.frustum(-5,5,5,-5,10,800);
+    p.frustum(-5,5,4,-4,10,5000);
 
     cacti = [];
     for (let i = 0; i < 10; i++){
@@ -182,8 +182,7 @@ function drawTrack(p = p5.instance) {
     p.translate(0,-carHeight/2-1-wheelRadius,0);
     */
     if (cameraMode == 0){
-      p.plane(1000);
-      p.camera(0,-200,-150,0,0,0,0,1,0);
+      p.camera(0,-200 * radius/8,-150 * radius/8,0,0,0,0,1,0);
       //skybox(p,0,-200,-150,0,0,0,0,1,0);
     }
     else if (cameraMode == 1){

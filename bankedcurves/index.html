@@ -64,10 +64,10 @@
                 Track Radius
               </div>
               <div class="slidecontainer">
-                <input type="range" min="5" max="50" value="25" class="slider" id="radiusSlider" oninput="changeRadiusSlider(this.value)">
+                <input type="range" min="5" max="40" value="25" class="slider" id="radiusSlider" oninput="changeRadiusSlider(this.value)">
               </div>
               <span>$r=$</span>
-              <input type="number" min="5" max="50" value="25" class="num" id="radiusNum" oninput="changeRadiusSlider(this.value)">
+              <input type="number" min="5" max="40" value="25" class="num" id="radiusNum" onKeyDown="return false" oninput="changeRadiusSlider(this.value)">
               <span>m</span>
             </div>
 
@@ -79,7 +79,7 @@
                 <input type="range" min="10" max="70" value="60" class="slider" id="angleSlider" oninput="changeAngleSlider(this.value)">
               </div>
               <span>$\theta=$</span>
-              <input type="number" min="10" max="70" value="60" class="num" id="angleNum" oninput="changeAngleSlider(this.value)">
+              <input type="number" min="10" max="70" value="60" class="num" id="angleNum" onKeyDown="return false" oninput="changeAngleSlider(this.value)">
               <span>$^{\circ}$</span>
             </div>
 
@@ -91,7 +91,7 @@
                 <input type="range" min=".05" max="1" step=".01" value=".4" class="slider" id="frictionSlider" oninput="changeFrictionSlider(this.value)">
               </div>
               <span>$\mu=$</span>
-              <input type="number" min=".05" max="1" step=".01" value=".4" class="num" id="frictionNum" oninput="changeFrictionSlider(this.value)">
+              <input type="number" min=".05" max="1" step=".01" value=".4" class="num" id="frictionNum" onKeyDown="return false" oninput="changeFrictionSlider(this.value)">
             </div>
 
             <div class="uielement">
@@ -102,7 +102,7 @@
                 <input type="range" min="1" max="50" value="5" class="slider" id="speedSlider" oninput="changeSpeedSlider(this.value)">
               </div>
               <span>$v=$</span>
-              <input type="number" min="1" max="50" value="5" class="num" id="speedNum" oninput="changeSpeedSlider(this.value)">
+              <input type="number" min="1" max="50" value="5" class="num" id="speedNum" onKeyDown="return false" oninput="changeSpeedSlider(this.value)">
               <span>$\frac{m}{s}$</span>
             </div>
 
@@ -114,7 +114,7 @@
               <input type="range" min="5" max="50" step=".1" value="9.8" class="slider" id="gravitySlider" oninput="changeGravitySlider(this.value)">
               </div>
               <span>$g=$</span>
-              <input type="number" min="5" max="50" step=".1" value="9.8" class="num" id="gravityNum" oninput="changeGravitySlider(this.value)">
+              <input type="number" min="5" max="50" step=".1" value="9.8" class="num" id="gravityNum" onKeyDown="return false" oninput="changeGravitySlider(this.value)">
               <span>$\frac{m}{s^2}$</span>
             </div>
 
@@ -126,7 +126,7 @@
                 <input type="range" min="10" max="1000" value="100" class="slider" id="massSlider" oninput="changeMassSlider(this.value)">
               </div>
               <span>$m=$</span>
-              <input type="number" min="10" max="1000" value="100" class="num" id="massNum" oninput="changeMassSlider(this.value)">
+              <input type="number" min="10" max="1000" value="100" class="num" id="massNum" onKeyDown="return false" oninput="changeMassSlider(this.value)">
               <span>$kg$</span>
             </div>
           </div>
