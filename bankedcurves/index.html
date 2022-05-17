@@ -46,17 +46,17 @@
         </div>
 
         <div class="column">
-          <div id="ui" class="shadow round" style="background-color:#aaa">
-            <!-- i'm fairly certain id ui doesn't exist anymore but it didn't break for some reason -->
+          <div class="shadow round" style="background-color:#aaa">
+
             <div class="uielement">
               <div>
                 Track Radius
               </div>
               <div class="slidecontainer">
-                <input type="range" min="10" max="50" value="25" class="slider" id="radiusSlider" oninput="changeRadiusSlider(this.value)">
+                <input type="range" min="5" max="50" value="25" class="slider" id="radiusSlider" oninput="changeRadiusSlider(this.value)">
               </div>
               <span>$r=$</span>
-              <input type="number" min="10" max="50" value="25" class="num" id="radiusNum" oninput="changeRadiusSlider(this.value)">
+              <input type="number" min="5" max="50" value="25" class="num" id="radiusNum" oninput="changeRadiusSlider(this.value)">
               <span>m</span>
             </div>
 
