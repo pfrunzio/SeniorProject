@@ -148,24 +148,28 @@ function changeAllDependents(){
   F_fs = F_G * Math.sin(ra) - F_C * Math.cos(ra);
   gf = F_N / F_G;
   pf = F_fs / (fcoeff * F_N);
-  document.getElementById('gforce').innerHTML = gf;
-  document.getElementById('pfriction').innerHTML = pf;
-
+  document.getElementById('gforce').innerHTML = gf.toFixed(3);
+  document.getElementById('pfriction').innerHTML = pf.toFixed(3);
 }
 function radians(a){
   return a * Math.PI/180;
+}
+
+function changePOV(pov){
+  if (pov == "abovePOV") {
+    document.getElementById('behindPOV').checked = false;
+    cameraMode = 0;
+  }
+  if (pov == "behindPOV"){
+    document.getElementById('abovePOV').checked = false;
+    cameraMode = 1;
+  }
 }
 
 var myp5 = new p5(t, "track");
 
 
 function drawTrack(p = p5.instance) {
-  if (cameraPOV.checked == true) {
-    cameraMode = 1;
-  }
-  else {
-    cameraMode = 0;
-  }
 
   effectiveRadius = radius * 10;
   //radius += 0.5;

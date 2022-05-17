@@ -28,20 +28,31 @@
       <div class="row">
         <div class="column">
           <div id="track" class="shadow"></div>
-          <div id="ui" class="shadow round" style="background-color:#aaa">
-            <div class="uielement">
-              <div class="row">
-                <div class="column">
+          <br>
+          <div class="shadow round" style="background-color:#aaa">
+            Camera Point Of View
+            <div class="row">
+              <div class="column">
+                <div class="uielement">
                   <label class="switch">
-                    <input type="checkbox" id="cameraPOV" name="camera" value="true">
+                    <input type="checkbox" id="abovePOV" name="camera" value="abovePOV" oninput="changePOV(this.value)" checked>
                     <div class="s round"></div>
                   </label>
-                </div>
-                <div class="column">
-                  Camera POV
+                  <br><br>
+                  Above
                 </div>
               </div>
-          </div>
+              <div class="column">
+                <div class="uielement">
+                  <label class="switch">
+                    <input type="checkbox" id="behindPOV" name="camera" value="behindPOV" oninput="changePOV(this.value)">
+                    <div class="s round"></div>
+                  </label>
+                  <br><br>
+                  Behind
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -121,7 +132,7 @@
 
           </div>
           <div class="column">
-            <div id="ui" class="shadow round" style="background-color:#aaa">
+            <div class="shadow round" style="background-color:#aaa">
               <div class="uielement">
                 <div>
                   Effective G-Force:

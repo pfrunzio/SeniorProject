@@ -36,6 +36,8 @@ td, th {
 .row {
   display: table;
 }
+
+
 /*basic div classes*/
 .container {
     padding: 0.01em 8px;
