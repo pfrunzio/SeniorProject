@@ -51,15 +51,15 @@ var t = function(p) {
     gravity = 9.81;
     radius = 8;
     trackAbove = 40;
-    carHeight = 10;
+    carHeight = 5;
     carLength = 30;
     carWidth = 15;
     carPos = 0;
-    wheelRadius = 5;
+    wheelRadius = 3;
     changeAllDependents();
     p.angleMode(p.DEGREES);
 
-    environmentMode = 1;
+    environmentMode = 3;
     // setup textures
     grassTexture = p.loadImage(
       'http://www.textures4photoshop.com/tex/thumbs/free-seamless-grass-texture-26.jpg'
@@ -76,6 +76,18 @@ var t = function(p) {
     dayTexture = p.loadImage(
       'https://media.istockphoto.com/photos/blue-sky-with-close-up-white-fluffy-tiny-clouds-background-and-picture-id1148851197?b=1&k=20&m=1148851197&s=170667a&w=0&h=IcfH92jxtpjVkQbatmPpa4PHHbcnX0XcsQckRXKN_OU='
     );
+    moltenTexture = p.loadImage(
+      'https://media.istockphoto.com/photos/seamless-magma-or-lava-texture-melting-flow-red-hot-molten-lava-flow-picture-id1208163567?k=20&m=1208163567&s=170667a&w=0&h=fRona60YIQ-IutCvS47bMQTVsFaxYbO4striJbXsvUY='
+    );
+    hellTexture = p.loadImage(
+      'https://thumbs.dreamstime.com/b/seamless-pattern-beautiful-flame-background-seamless-texture-fire-hell-background-148158207.jpg'
+    );
+    desertTexture = p.loadImage(
+      'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/983d5aea-ba23-4e43-a697-d32a53deac25/ddty47l-04078173-88d4-49fc-8c02-eb0bbf18ce4f.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzk4M2Q1YWVhLWJhMjMtNGU0My1hNjk3LWQzMmE1M2RlYWMyNVwvZGR0eTQ3bC0wNDA3ODE3My04OGQ0LTQ5ZmMtOGMwMi1lYjBiYmYxOGNlNGYucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.d8IksyWLJuibXcwh9yoERlsYLWr9QF8cPyuJHrABuwM'
+    );
+    carTexture = p.loadImage(
+      'https://media.istockphoto.com/photos/grunge-red-background-picture-id1131429835?b=1&k=20&m=1131429835&s=170667a&w=0&h=uWJekGgrp4tutizcH3-DB1f0YJGHzI-8Np7Gig07WjA='
+    );
 
     cameraMode = 0;
     p.frustum(-5,5,4,-4,10,5000);
@@ -91,10 +103,16 @@ var t = function(p) {
     let locY = p.mouseY - p.width / 2;
 
     if (environmentMode == 0){
-      p.ambientLight(140);
+      p.ambientLight(120,120,140);
     }
     else if (environmentMode == 1 || environmentMode == 2){
-      p.ambientLight(200);
+      p.ambientLight(200,200,190);
+    }
+    else if (environmentMode == 6){
+      p.ambientLight(200,120,120);
+    }
+    else if (environmentMode == 3){
+      p.ambientLight(180,160,150);
     }
     //pointLight(2550, 2550, 2550, 0, 0, -1*frameCount)
 
@@ -158,6 +176,10 @@ function changeAllDependents(){
   pf = F_fs / (fcoeff * F_N);
   document.getElementById('gforce').innerHTML = gf.toFixed(3);
   document.getElementById('pfriction').innerHTML = pf.toFixed(3);
+
+  if (radius == 6 && angle == 66 && fcoeff == 0.66 && speed == 6 && gravity == 66.6 && mass == 666){
+    environmentMode = 6;
+  }
 }
 function radians(a){
   return a * Math.PI/180;
@@ -206,6 +228,12 @@ function drawTrack(p = p5.instance) {
         p.texture(nightTexture);
       }
       else if (environmentMode == 1 || environmentMode == 2){
+        p.texture(dayTexture);
+      }
+      else if (environmentMode == 6){
+        p.texture(hellTexture);
+      }
+      else if (environmentMode == 3){
         p.texture(dayTexture);
       }
       p.push();
@@ -295,6 +323,12 @@ function drawTrack(p = p5.instance) {
       else if (environmentMode == 2){
         p.texture(grassTexture);
       }
+      else if (environmentMode == 6){
+        p.texture(moltenTexture);
+      }
+      else if (environmentMode == 3){
+        p.texture(desertTexture);
+      }
       p.rotateX(90);
       for (let i = 0; i < 10; i++){
         p.translate(0,-2000,0);
@@ -333,7 +367,7 @@ function drawTrack(p = p5.instance) {
         //translate(radius*sin(90-angle),radius*sin(angle),0);
         p.fill(255,0,0);
         p.strokeWeight(1);
-        p.box(carWidth,carHeight,carLength);
+        drawCar(p,carWidth,carHeight,carLength);
         p.fill(200);
         p.strokeWeight(1);
         var rot = -(((effectiveRadius*(carPos*p.PI/180))%(2*p.PI*wheelRadius))/(2*p.PI*wheelRadius))*360;
@@ -368,6 +402,36 @@ function drawTrack(p = p5.instance) {
 };
 function skybox(p = p5.instance,x,y,z,hx,hy,hz,ux,uy,uz){
 
+}
+function drawCar(p = p5.instance,w,h,l){
+  p.texture(carTexture);
+  p.noStroke();
+  p.box(w,h,l);
+  p.push();
+    p.translate(0,-h/6,l/3);
+    p.rotateX(-10);
+    p.box(w-0.5,h,l*(5/16));
+  p.pop();
+  p.push();
+    p.translate(0,-h,l/6);
+    p.rotateX(-70);
+    p.box(w-1,h,l*(3/16));
+  p.pop();
+  p.push();
+    p.translate(0,-h,l/12);
+    p.box(w-0.5,h*(3/2),l/4);
+  p.pop();
+  p.push();
+    p.translate(0,-h,0);
+    p.rotateX(70);
+    p.box(w-1,h,l*(3/16));
+  p.pop();
+  p.push();
+    p.translate(0,-h/6,-l*(4/16));
+    p.rotateX(10);
+    p.box(w-0.2,h,l*(7/16));
+  p.pop();
+  p.stroke(0);
 }
 function drawCactus(p = p5.instance, size, arm1, arm2, rotation){
   p.push();
