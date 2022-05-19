@@ -59,7 +59,6 @@ var t = function(p) {
     changeAllDependents();
     p.angleMode(p.DEGREES);
 
-    environmentMode = 3;
     // setup textures
     grassTexture = p.loadImage(
       'http://www.textures4photoshop.com/tex/thumbs/free-seamless-grass-texture-26.jpg'
@@ -90,6 +89,7 @@ var t = function(p) {
     );
 
     cameraMode = 0;
+    environmentMode = 3;
     p.frustum(-5,5,4,-4,10,5000);
 
     cacti = [];
@@ -194,6 +194,34 @@ function changePOV(pov){
   if (pov == "behindPOV"){
     document.getElementById('abovePOV').checked = false;
     cameraMode = 1;
+  }
+}
+
+function changeBackground(b){
+  if (b == "dirt") {
+    document.getElementById('sand').checked = false;
+    document.getElementById('moon').checked = false;
+    document.getElementById('urban').checked = false;
+    environmentMode = 3;
+
+  }
+  if (b == "sand"){
+    document.getElementById('dirt').checked = false;
+    document.getElementById('moon').checked = false;
+    document.getElementById('urban').checked = false;
+    environmentMode = 1;
+  }
+  if (b == "moon"){
+    document.getElementById('dirt').checked = false;
+    document.getElementById('sand').checked = false;
+    document.getElementById('urban').checked = false;
+    environmentMode = 2;
+  }
+  if (b == "urban"){
+    document.getElementById('dirt').checked = false;
+    document.getElementById('sand').checked = false;
+    document.getElementById('moon').checked = false;
+    environmentMode = 4;
   }
 }
 
