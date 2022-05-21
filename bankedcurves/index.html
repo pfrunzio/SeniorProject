@@ -31,44 +31,36 @@
         <div class="column">
           <div id="track" class="shadow"></div>
           <br>
-          <div class="shadow round" style="background-color:#aaa">
+          <div class="shadow round" style="background-color:#aaa; width:600px">
             Background
             <div class="row">
               <div class="column">
                 <div class="uielement">
-                  <label class="switch">
-                    <input type="radio" id="dirt" name="background" value="dirt" oninput="changeBackground(this.value)" checked>
-                    <div class="s b round"></div>
+                  <label class="background">
+                    <input type="radio" id="grass" name="background" value="grass" oninput="changeBackground(this.value)" checked>
+                    <div class="b round grass"></div>
                   </label>
                 </div>
               </div>
 
               <div class="column">
                 <div class="uielement">
-                  <label class="switch">
+                  <label class="background">
+                    <input type="radio" id="dirt" name="background" value="dirt" oninput="changeBackground(this.value)">
+                    <div class="b round dirt"></div>
+                  </label>
+                </div>
+              </div>
+
+              <div class="column">
+                <div class="uielement">
+                  <label class="background">
                     <input type="radio" id="sand" name="background" value="sand" oninput="changeBackground(this.value)">
-                    <div class="s b round"></div>
+                    <div class="b round sand"></div>
                   </label>
                 </div>
               </div>
 
-              <div class="column">
-                <div class="uielement">
-                  <label class="switch">
-                    <input type="radio" id="moon" name="background" value="moon" oninput="changeBackground(this.value)">
-                    <div class="s b round"></div>
-                  </label>
-                </div>
-              </div>
-
-              <div class="column">
-                <div class="uielement">
-                  <label class="switch">
-                    <input type="radio" id="urban" name="background" value="urban" oninput="changeBackground(this.value)">
-                    <div class="s b round"></div>
-                  </label>
-                </div>
-              </div>
             </div>
           </div>
           <br>
@@ -77,7 +69,7 @@
             <div class="row">
               <div class="column">
                 <div class="uielement">
-                  <label class="switch">
+                  <label class="camera">
                     <input type="radio" id="abovePOV" name="camera" value="abovePOV" oninput="changePOV(this.value)" checked>
                     <div class="s round"></div>
                   </label>
@@ -87,7 +79,7 @@
               </div>
               <div class="column">
                 <div class="uielement">
-                  <label class="switch">
+                  <label class="camera">
                     <input type="radio" id="behindPOV" name="camera" value="behindPOV" oninput="changePOV(this.value)">
                     <div class="s round"></div>
                   </label>
@@ -97,7 +89,7 @@
               </div>
               <div class="column">
                 <div class="uielement">
-                  <label class="switch">
+                  <label class="camera">
                     <input type="radio" id="behindPOV2" name="camera" value="behindPOV2" oninput="changePOV(this.value)">
                     <div class="s round"></div>
                   </label>
