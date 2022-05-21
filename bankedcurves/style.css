@@ -209,14 +209,6 @@ input:checked + .s:before {
   background: #4779de;
   cursor: pointer;
 }
-<<<<<<< HEAD
-input:checked + #play{
-  
-}
-
-input:checked + .b {
-  filter: grayscale(100%);
-=======
 
 /* switches */
 .switch {
@@ -229,5 +221,4 @@ input:checked + .b {
   opacity: 0;
   width: 0;
   height: 0;
->>>>>>> 41b197c22b2a3a6ee0514e980614ec6c64179aaf
 }
