@@ -188,46 +188,28 @@ function radians(a){
 
 function changePOV(pov){
   if (pov == "abovePOV") {
-    document.getElementById('behindPOV').checked = false;
-    document.getElementById('behindPOV2').checked = false;
     cameraMode = 0;
   }
   if (pov == "behindPOV"){
-    document.getElementById('abovePOV').checked = false;
-    document.getElementById('behindPOV2').checked = false;
     cameraMode = 1;
   }
   if (pov == "behindPOV2"){
-    document.getElementById('abovePOV').checked = false;
-    document.getElementById('behindPOV').checked = false;
     cameraMode = 2;
   }
 }
 
 function changeBackground(b){
   if (b == "dirt") {
-    document.getElementById('sand').checked = false;
-    document.getElementById('moon').checked = false;
-    document.getElementById('urban').checked = false;
     environmentMode = 3;
 
   }
   if (b == "sand"){
-    document.getElementById('dirt').checked = false;
-    document.getElementById('moon').checked = false;
-    document.getElementById('urban').checked = false;
     environmentMode = 1;
   }
   if (b == "moon"){
-    document.getElementById('dirt').checked = false;
-    document.getElementById('sand').checked = false;
-    document.getElementById('urban').checked = false;
     environmentMode = 2;
   }
   if (b == "urban"){
-    document.getElementById('dirt').checked = false;
-    document.getElementById('sand').checked = false;
-    document.getElementById('moon').checked = false;
     environmentMode = 4;
   }
 }

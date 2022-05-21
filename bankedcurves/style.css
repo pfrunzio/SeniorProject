@@ -3,15 +3,16 @@ body {
     text-align: center;
 }
 
-.color {
-    color: white;
-    background-color: #294681;
+/* header and footer */
+.hf {
+  padding: .5em;
+  color: white;
+  background-color: #294681;
 }
 
-.grey {
-  color: #000;
+/* .grey {
   background-color: #f1f1f1;
-}
+} */
 
 .column {
   float: left;
@@ -29,12 +30,6 @@ body {
 
 
 /*basic div classes*/
-.container {
-    padding: 0.01em 8px;
-    content: "";
-    display: table;
-    clear: both;
-}
 
 .content {
     margin-left: auto;

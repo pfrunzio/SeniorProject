@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 
-
 <html>
   <head>
         <link rel="stylesheet" href="style.css">
@@ -19,9 +18,12 @@
         </script>
         <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="description" content="'22 Senior Project to create a classroom tool which simulates banked curves">
+        <meta name="author" content="Brandon Faunce, Paola Frunzio">
     </head>
     <body>
-      <header class="container color center" style="width:100%">
+      <header class="hf center">
         <h1>Banked Curves Simulation</h1>
       </header>
 
@@ -35,7 +37,7 @@
               <div class="column">
                 <div class="uielement">
                   <label class="switch">
-                    <input type="checkbox" id="dirt" name="background" value="dirt" oninput="changeBackground(this.value)" checked>
+                    <input type="radio" id="dirt" name="background" value="dirt" oninput="changeBackground(this.value)" checked>
                     <div class="s b round"></div>
                   </label>
                 </div>
@@ -44,7 +46,7 @@
               <div class="column">
                 <div class="uielement">
                   <label class="switch">
-                    <input type="checkbox" id="sand" name="background" value="sand" oninput="changeBackground(this.value)">
+                    <input type="radio" id="sand" name="background" value="sand" oninput="changeBackground(this.value)">
                     <div class="s b round"></div>
                   </label>
                 </div>
@@ -53,7 +55,7 @@
               <div class="column">
                 <div class="uielement">
                   <label class="switch">
-                    <input type="checkbox" id="moon" name="background" value="moon" oninput="changeBackground(this.value)">
+                    <input type="radio" id="moon" name="background" value="moon" oninput="changeBackground(this.value)">
                     <div class="s b round"></div>
                   </label>
                 </div>
@@ -62,7 +64,7 @@
               <div class="column">
                 <div class="uielement">
                   <label class="switch">
-                    <input type="checkbox" id="urban" name="background" value="urban" oninput="changeBackground(this.value)">
+                    <input type="radio" id="urban" name="background" value="urban" oninput="changeBackground(this.value)">
                     <div class="s b round"></div>
                   </label>
                 </div>
@@ -76,7 +78,7 @@
               <div class="column">
                 <div class="uielement">
                   <label class="switch">
-                    <input type="checkbox" id="abovePOV" name="camera" value="abovePOV" oninput="changePOV(this.value)" checked>
+                    <input type="radio" id="abovePOV" name="camera" value="abovePOV" oninput="changePOV(this.value)" checked>
                     <div class="s round"></div>
                   </label>
                   <br><br>
@@ -86,7 +88,7 @@
               <div class="column">
                 <div class="uielement">
                   <label class="switch">
-                    <input type="checkbox" id="behindPOV" name="camera" value="behindPOV" oninput="changePOV(this.value)">
+                    <input type="radio" id="behindPOV" name="camera" value="behindPOV" oninput="changePOV(this.value)">
                     <div class="s round"></div>
                   </label>
                   <br><br>
@@ -96,7 +98,7 @@
               <div class="column">
                 <div class="uielement">
                   <label class="switch">
-                    <input type="checkbox" id="behindPOV2" name="camera" value="behindPOV2" oninput="changePOV(this.value)">
+                    <input type="radio" id="behindPOV2" name="camera" value="behindPOV2" oninput="changePOV(this.value)">
                     <div class="s round"></div>
                   </label>
                   <br><br>
@@ -243,7 +245,7 @@
 
       </div>
 
-      <footer class="container color center" style="width:100%">
+      <footer class="hf center">
         <p>Made by Paola Frunzio '22 and Brandon Faunce '22</p>
       </footer>
     </body>
