@@ -88,7 +88,8 @@ var t = function(p) {
       'https://media.istockphoto.com/photos/grunge-red-background-picture-id1131429835?b=1&k=20&m=1131429835&s=170667a&w=0&h=uWJekGgrp4tutizcH3-DB1f0YJGHzI-8Np7Gig07WjA='
     );
 
-    cameraMode = 0;
+
+    cameraMode = 2;
     environmentMode = 3;
     p.frustum(-5,5,4,-4,10,5000);
 
@@ -177,7 +178,7 @@ function changeAllDependents(){
   document.getElementById('gforce').innerHTML = gf.toFixed(3);
   document.getElementById('pfriction').innerHTML = pf.toFixed(3);
 
-  if (radius == 6 && angle == 66 && fcoeff == 0.66 && speed == 6 && gravity == 66.6 && mass == 666){
+  if (radius == 66 && angle == 66 && fcoeff == 0.66 && speed == 66 && gravity == 66.6 && mass == 666){
     environmentMode = 6;
   }
 }
@@ -244,7 +245,7 @@ function drawTrack(p = p5.instance) {
       p.camera(0,-200 * radius/12 - 100,-150 * radius/12 - 75,0,radius*3,0,0,1,0);
       //skybox(p,0,-200,-150,0,0,0,0,1,0);
     }
-    else if (cameraMode == 1){
+    else if (cameraMode == 1 || cameraMode == 2){
       /*p.camera(
         p.cos(camPos%360)*(effectiveRadius-20),-trackAbove*p.sin(angle)/2,-p.sin(camPos%360)*(effectiveRadius-20),
         p.cos((carPos)%360)*(effectiveRadius-30),-trackAbove*p.sin(angle)/2,-p.sin((carPos)%360)*(effectiveRadius-30),
@@ -265,7 +266,7 @@ function drawTrack(p = p5.instance) {
         p.texture(dayTexture);
       }
       p.push();
-      p.translate(0,0,-100);
+      p.translate(0,0,-500);
       p.plane(1000);
       p.pop();
 
@@ -293,6 +294,11 @@ function drawTrack(p = p5.instance) {
       let headingy = cary + awayy * above2;
       let headingz = carz + awayz * above2;
 
+      if (cameraMode == 2){
+        awayx = 0;
+        awayy = -1;
+        awayz = 0;
+      }
       p.camera(finalx,finaly,finalz,headingx,headingy,headingz,-awayx,-awayy,-awayz);
     }
 
@@ -341,7 +347,7 @@ function drawTrack(p = p5.instance) {
     p.pop();
 
     p.push(); // ground
-      p.translate(-1100,0,1100);
+      p.translate(-1600,0,1600);
       if (environmentMode == 0){
         p.texture(grassTexture);
       }
@@ -358,10 +364,10 @@ function drawTrack(p = p5.instance) {
         p.texture(desertTexture);
       }
       p.rotateX(90);
-      for (let i = 0; i < 10; i++){
-        p.translate(0,-2000,0);
+      for (let i = 0; i < 15; i++){
+        p.translate(0,-3000,0);
         p.translate(200,0,0);
-        for (let z = 0; z < 10; z++){
+        for (let z = 0; z < 15; z++){
           p.translate(0,200,0);
           p.plane(200);
         }
@@ -396,32 +402,32 @@ function drawTrack(p = p5.instance) {
         p.fill(255,0,0);
         p.strokeWeight(1);
         drawCar(p,carWidth,carHeight,carLength);
-        p.fill(200);
+        p.fill(100);
         p.strokeWeight(1);
         var rot = -(((effectiveRadius*(carPos*p.PI/180))%(2*p.PI*wheelRadius))/(2*p.PI*wheelRadius))*360;
         p.push(); // wheel 1
           p.translate(carWidth/2,carHeight/2,carLength/2-wheelRadius-2);
           p.rotateZ(90);
           p.rotateY(rot);
-          p.cylinder(wheelRadius,2,8,4,true,true);
+          p.cylinder(wheelRadius,2,8,1,true,true);
         p.pop();
         p.push(); // wheel 2
           p.translate(carWidth/2,carHeight/2,-carLength/2+wheelRadius+2);
           p.rotateZ(90);
           p.rotateY(rot);
-          p.cylinder(wheelRadius,2,8,4,true,true);
+          p.cylinder(wheelRadius,2,8,1,true,true);
         p.pop();
         p.push(); // wheel 3
           p.translate(-carWidth/2,carHeight/2,carLength/2-wheelRadius-2);
           p.rotateZ(90);
           p.rotateY(rot);
-          p.cylinder(wheelRadius,2,8,4,true,true);
+          p.cylinder(wheelRadius,2,8,1,true,true);
         p.pop();
         p.push(); // wheel 4
           p.translate(-carWidth/2,carHeight/2,-carLength/2+wheelRadius+2);
           p.rotateZ(90);
           p.rotateY(rot);
-          p.cylinder(wheelRadius,2,8,4,true,true);
+          p.cylinder(wheelRadius,2,8,1,true,true);
         p.pop();
       p.pop();
 
@@ -582,7 +588,28 @@ function drawFBD(p = p5.instance){
   p.pop();
 
 }
+var f = function(p) {
+  p.setup = function() {
+    p.createCanvas(600, 500, p.P2D);
+    p.angleMode(p.DEGREES);
+    document.getElementById("defaultCanvas2").classList.add('layered');
+  };
+  p.draw = function() {
+    p.background(220);
 
+    drawOverlay(p);
+
+  };
+};
+var myp5 = new p5(f, 'overlay');
+function drawOverlay(p = p5.instance){
+  p.clear();
+  p.fill(100);
+
+  if (cameraMode == 1){
+    //p.ellipse(300,350,10,10);
+  }
+}
 function objectDrawn(p = p5.instance, radius, distance, width,fullrad){
   if (distance + radius < fullrad - width || distance - radius > fullrad + width){
     return true;

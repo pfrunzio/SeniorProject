@@ -67,7 +67,13 @@ body {
 .num {
   width:45px;
 }
-
+.layered {
+  position:absolute;
+  left:8px;
+  top:88px;
+  width:1200px;
+  height:1000px;
+}
 
 canvas {
   display: block;
