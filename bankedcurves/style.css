@@ -2,14 +2,77 @@ body {
     margin: 0;
     text-align: center;
 }
+#loaderWrapper{
+  position:absolute;
+  width:100%;
+  height:100%;
+  top:0px;
+  left:0px;
+  background-color: #294681;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
 
+}
+.loaderFade{
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 300ms linear 5s, opacity 300ms linear 5s;
+}
+#loaderAnimation{
+  align-self:center;
+  width:200px;
+  height:200px;
+  border: 2px solid white;
+  position:relative;
+}
+#loaderCover{
+  top:177px;
+  left:-200px;
+  width:200px;
+  height:150px;
+  background-color: #294681;
+  position:relative;
+}
 /* header and footer */
 .hf {
   padding: .5em;
   color: white;
   background-color: #294681;
 }
-
+#bar1 {
+  width: 40px;
+  height: 150px;
+  position: absolute;
+  background-color: white;
+  animation-name: loader-b1;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+#bar2 {
+  width: 40px;
+  height: 150px;
+  position: absolute;
+  background-color: white;
+  animation-name: loader-b2;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+#ball {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  background-color: white;
+  border-radius: 50%;
+  animation-name: loader-ball;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(0,0,0.4,1);
+  animation-direction: alternate;
+}
 /* .grey {
   background-color: #f1f1f1;
 } */
@@ -221,4 +284,54 @@ input:checked + .s:before {
   opacity: 0;
   width: 0;
   height: 0;
+}
+
+@keyframes loader-b1 {
+  0% {
+    opacity:1;
+    left:80px;
+    top:110px;
+  }
+  50% {
+    left:30px;
+    top:60px;
+  }
+  51% {
+    opacity:0;
+  }
+  100% {
+    left:80px;
+    top:60px;
+    opacity:0;
+  }
+}
+@keyframes loader-b2 {
+  0% {
+    opacity:0;
+    left:130px;
+    top:140px;
+  }
+  50% {
+    opacity:0;
+  }
+  51% {
+    opacity:1;
+    left:130px;
+    top:160px;
+  }
+  100% {
+    left:80px;
+    top:110px;
+    opacity:1;
+  }
+}
+@keyframes loader-ball {
+  0% {
+    left:90px;
+    top:95px;
+  }
+  100% {
+    left:90px;
+    top:30px;
+  }
 }

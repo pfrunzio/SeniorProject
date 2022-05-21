@@ -103,6 +103,8 @@ var t = function(p) {
     for (let i = 0; i < 10; i++){
       cacti.push(new Cactus(p.random(-200,200),p.random(-200,200),p.random(10,30)));
     }
+
+    loaded();
   };
   p.draw = function() {
     p.background(220);
@@ -151,7 +153,10 @@ var t = function(p) {
 
   };
 };
-
+function loaded(){
+  document.getElementById('loaderWrapper').classList.add("loaderFade");
+  console.log("A");
+}
 function changeRadiusSlider(i){
   radius = Number(i);
   changeAllDependents();
