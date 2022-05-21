@@ -26,6 +26,9 @@ var nightTexture;
 var environmentMode; // 0 = dirt, 1 = sand, 2 = moon, 3 = hell, 4 = urban
 var cameraMode; // 0 = overhead, 1 = behind car parallel to track, 2 = behind car parallel to ground
 var cacti;
+var rolling;
+var slipping;
+var slippedAmt;
 
 class Cactus{
   x;
@@ -45,7 +48,7 @@ var t = function(p) {
     p.createCanvas(600, 500, p.WEBGL);
     trackResolution = 1;
     angle = 45;
-    fcoeff = 0.02;
+    fcoeff = 0.2;
     speed = 10;
     mass = 100;
     gravity = 9.81;
@@ -56,6 +59,9 @@ var t = function(p) {
     carWidth = 15;
     carPos = 0;
     wheelRadius = 3;
+    rolling = false;
+    slipping = 0;
+    slippedAmt = 0;
     changeAllDependents();
     p.angleMode(p.DEGREES);
 
@@ -123,7 +129,25 @@ var t = function(p) {
     if (p.frameRate() != 0) {
       fr = p.frameRate();
     }
-    carPos += 180 * speed / (p.PI*radius*fr);
+    if (rolling){
+      carPos += 180 * speed / (p.PI*radius*fr);
+      if (pf > 1){
+        slipping = -pf + 1;
+      }
+      else if (pf < -1){
+        slipping = -pf - 1;
+      }
+      if (slipping > 1){
+        slipping = 1;
+      }
+      else if (slipping < -1){
+        slipping = -1;
+      }
+      slippedAmt += slipping;
+      if (Math.abs(slippedAmt) > trackAbove/2){
+        stopPlay();
+      }
+    }
 
   };
 };
@@ -165,7 +189,15 @@ function changeMassSlider(i){
   document.getElementById('massSlider').value = mass;
   document.getElementById('massNum').value = mass;
 }
-
+function togglePlay(){
+  rolling = !rolling;
+}
+function stopPlay(){
+  rolling = false;
+  document.getElementById('play').checked = false;
+  slippedAmt = 0;
+  slipping = 0;
+}
 function changeAllDependents(){
   ra = radians(angle);
   F_G = mass * gravity;
@@ -176,7 +208,7 @@ function changeAllDependents(){
   gf = F_N / F_G;
   pf = F_fs / (fcoeff * F_N);
   document.getElementById('gforce').innerHTML = gf.toFixed(3);
-  document.getElementById('pfriction').innerHTML = pf.toFixed(3);
+  document.getElementById('pfriction').innerHTML = Math.abs((pf*100).toFixed(1))+"%";
 
   if (radius == 66 && angle == 66 && fcoeff == 0.66 && speed == 66 && gravity == 66.6 && mass == 666){
     environmentMode = 6;
@@ -384,6 +416,8 @@ function drawTrack(p = p5.instance) {
         p.stroke(0);
         p.translate(effectiveRadius,0,0);
         p.rotateZ(-angle);
+        p.translate(slippedAmt,0,0);
+        p.rotateY(slippedAmt*(-1));
         p.translate(0,-carHeight/2-1-wheelRadius,0);
         //translate(radius*sin(angle),-radius*sin(90-angle),0);
         //translate(radius*sin(90-angle),radius*sin(angle),0);
@@ -597,6 +631,8 @@ function drawOverlay(p = p5.instance){
   if (cameraMode == 1){
     //p.ellipse(300,350,10,10);
   }
+  //p.fill(30,140,50);
+  //p.ellipse(565,35,50,50);
 }
 function objectDrawn(p = p5.instance, radius, distance, width,fullrad){
   if (distance + radius < fullrad - width || distance - radius > fullrad + width){

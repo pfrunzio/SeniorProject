@@ -65,7 +65,7 @@ body {
 .layered {
   position:absolute;
   left:8px;
-  top:88px;
+  top:103px;
   width:1200px;
   height:1000px;
 }
@@ -177,7 +177,9 @@ input:checked + .s:before {
   background: #4779de;
   cursor: pointer;
 }
-
+input:checked + #play{
+  
+}
 
 input:checked + .b {
   filter: grayscale(100%);
