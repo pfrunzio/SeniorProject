@@ -24,7 +24,7 @@ var roadTexture;
 var sandTexture;
 var nightTexture;
 var environmentMode; // 0 = dirt, 1 = sand, 2 = moon, 3 = hell, 4 = urban
-var cameraMode; // 0 = overhead, 1 = behind car
+var cameraMode; // 0 = overhead, 1 = behind car parallel to track, 2 = behind car parallel to ground
 var cacti;
 
 class Cactus{
@@ -89,7 +89,7 @@ var t = function(p) {
     );
 
 
-    cameraMode = 2;
+    cameraMode = 0;
     environmentMode = 3;
     p.frustum(-5,5,4,-4,10,5000);
 
@@ -189,12 +189,18 @@ function radians(a){
 function changePOV(pov){
   if (pov == "abovePOV") {
     document.getElementById('behindPOV').checked = false;
+    document.getElementById('behindPOV2').checked = false;
     cameraMode = 0;
-
   }
   if (pov == "behindPOV"){
     document.getElementById('abovePOV').checked = false;
+    document.getElementById('behindPOV2').checked = false;
     cameraMode = 1;
+  }
+  if (pov == "behindPOV2"){
+    document.getElementById('abovePOV').checked = false;
+    document.getElementById('behindPOV').checked = false;
+    cameraMode = 2;
   }
 }
 
