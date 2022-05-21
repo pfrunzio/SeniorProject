@@ -90,7 +90,7 @@ var t = function(p) {
 
 
     cameraMode = 0;
-    environmentMode = 3;
+    environmentMode = 2;
     p.frustum(-5,5,4,-4,10,5000);
 
     cacti = [];
@@ -199,18 +199,14 @@ function changePOV(pov){
 }
 
 function changeBackground(b){
-  if (b == "dirt") {
-    environmentMode = 3;
-
-  }
   if (b == "sand"){
     environmentMode = 1;
   }
-  if (b == "moon"){
+  if (b == "grass"){
     environmentMode = 2;
   }
-  if (b == "urban"){
-    environmentMode = 4;
+  if (b == "dirt") {
+    environmentMode = 3;
   }
 }
 

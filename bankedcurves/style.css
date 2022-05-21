@@ -75,27 +75,67 @@ canvas {
 }
 
 
-
-
-
-
-/* SWITCH */
-/* The switch - the box around the slider */
-.switch {
+/* envi buttons */
+.background {
   position: relative;
   display: inline-block;
-  width: 40px;
-  height: 24px;
+  width: 80px;
+  height: 60px;
 }
-
-/* Hide default HTML checkbox */
-.switch input {
+.background input {
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-/* The slider */
+.b {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #d3d3d3;
+  -webkit-transition: .4s;
+  transition: .4s;
+  filter: grayscale(100%);
+}
+
+.b:before {
+  position: absolute;
+  content: "";
+  background-color: #d3d3d3;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .b {
+  filter: grayscale(0%);
+}
+
+.grass {
+  background-image: url("http://www.textures4photoshop.com/tex/thumbs/free-seamless-grass-texture-26.jpg");
+}
+.dirt {
+  background-image: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/983d5aea-ba23-4e43-a697-d32a53deac25/ddty47l-04078173-88d4-49fc-8c02-eb0bbf18ce4f.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzk4M2Q1YWVhLWJhMjMtNGU0My1hNjk3LWQzMmE1M2RlYWMyNVwvZGR0eTQ3bC0wNDA3ODE3My04OGQ0LTQ5ZmMtOGMwMi1lYjBiYmYxOGNlNGYucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.d8IksyWLJuibXcwh9yoERlsYLWr9QF8cPyuJHrABuwM");
+}
+.sand {
+  background-image: url("https://thumbs.dreamstime.com/b/k-seamless-sand-texture-surface-high-resolution-155924341.jpg");
+}
+
+/* switches */
+.camera {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 24px;
+}
+.camera input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
 .s {
   position: absolute;
   cursor: pointer;
@@ -134,7 +174,6 @@ input:checked + .s:before {
   transform: translateX(16px);
 }
 
-/* Rounded sliders */
 .s.round {
   border-radius: 24px;
 }
@@ -143,7 +182,7 @@ input:checked + .s:before {
   border-radius: 50%;
 }
 
-
+/* sliders */
 .slider {
   -webkit-appearance: none;
   width: 100%;
@@ -151,14 +190,7 @@ input:checked + .s:before {
   border-radius: 15px;
   background: #d3d3d3;
   outline: none;
-  /* opacity: 0.7;
-  -webkit-transition: .2s;
-  transition: opacity .2s; */
 }
-
-/* .slider:hover {
-  opacity: 1;
-} */
 
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
@@ -178,7 +210,15 @@ input:checked + .s:before {
   cursor: pointer;
 }
 
-
-input:checked + .b {
-  filter: grayscale(100%);
+/* switches */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 24px;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
