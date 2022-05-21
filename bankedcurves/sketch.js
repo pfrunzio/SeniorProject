@@ -44,12 +44,12 @@ var t = function(p) {
 
     p.createCanvas(600, 500, p.WEBGL);
     trackResolution = 1;
-    angle = 77;
+    angle = 45;
     fcoeff = 0.02;
-    speed = 1;
+    speed = 10;
     mass = 100;
     gravity = 9.81;
-    radius = 8;
+    radius = 15;
     trackAbove = 40;
     carHeight = 5;
     carLength = 30;
