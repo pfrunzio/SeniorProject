@@ -759,10 +759,11 @@ function drawFBD(p = p5.instance){
       p.rotate(-F_Net_angle);
       drawArrow(p,p.createVector(0,0),p.createVector(values[3],0),'red',1,3); // centripetal force
       //label
+      p.rotate(F_Net_angle);
       p.fill('white');
       p.stroke('red');
       p.textSize(16);
-      p.text('Fc', 120, -20);
+      p.text('FNet', 120, -20);
 
     }
 
