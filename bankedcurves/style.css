@@ -18,7 +18,7 @@ body {
 .loaderFade{
   opacity: 0;
   visibility: hidden;
-  transition: visibility 300ms linear 5s, opacity 300ms linear 5s;
+  transition: visibility 300ms linear 1s, opacity 300ms linear 1s;
 }
 #loaderAnimation{
   align-self:center;

@@ -26,6 +26,8 @@ var nightTexture;
 var environmentMode; // 0 = dirt, 1 = sand, 2 = moon, 3 = hell, 4 = urban
 var cameraMode; // 0 = overhead, 1 = behind car parallel to track, 2 = behind car parallel to ground
 var cacti;
+var palms;
+var pillars;
 var rolling;
 var slipping;
 var slippedAmt;
@@ -37,6 +39,37 @@ class Cactus{
   constructor(x,z,height){
     this.x = x;
     this.z = z;
+    this.height = height;
+  }
+}
+class Palm{
+  x;
+  z;
+  size;
+  angleList;
+  constructor(x,z,size,h,p = p5.instance){
+    this.x = x;
+    this.z = z;
+    this.size = size;
+    this.angleList = [];
+    let angle = 0;
+    for (let i = 0; i < h; i++){
+      this.angleList.push(p.random(-10,10) + angle);
+      angle += p.random(-10,10);
+      console.log("1");
+    }
+
+  }
+}
+class Pillar{
+  x;
+  z;
+  size;
+  height;
+  constructor(x,z,size,height){
+    this.x = x;
+    this.z = z;
+    this.size = size;
     this.height = height;
   }
 }
@@ -93,15 +126,34 @@ var t = function(p) {
     carTexture = p.loadImage(
       'https://media.istockphoto.com/photos/grunge-red-background-picture-id1131429835?b=1&k=20&m=1131429835&s=170667a&w=0&h=uWJekGgrp4tutizcH3-DB1f0YJGHzI-8Np7Gig07WjA='
     );
-
+    cactusTexture = p.loadImage(
+      'https://thumbs.dreamstime.com/b/seamless-pattern-cactus-texture-cactus-spots-green-background-seamless-pattern-cactus-texture-119128236.jpg'
+    );
+    palmBarkTexture = p.loadImage(
+      'https://thumbs.dreamstime.com/b/texture-bark-trunk-palm-tree-close-up-128090890.jpg'
+    );
+    palmFrondTexture = p.loadImage(
+      'https://media.istockphoto.com/photos/banana-leaf-abstract-picture-id481560298?k=20&m=481560298&s=612x612&w=0&h=DypGgEgjBN4DdqoUzRVWss2yr0VmRyoNlagFTuCnHVM='
+    );
+    pillarTexture = p.loadImage(
+      'http://www.textures4photoshop.com/tex/thumbs/dark-rock-wall-seamless-texture-free-105.jpg'
+    );
 
     cameraMode = 0;
     environmentMode = 2;
     p.frustum(-5,5,4,-4,10,5000);
 
     cacti = [];
-    for (let i = 0; i < 10; i++){
-      cacti.push(new Cactus(p.random(-200,200),p.random(-200,200),p.random(10,30)));
+    for (let i = 0; i < 50; i++){
+      cacti.push(new Cactus(p.random(-800,800),p.random(-800,800),p.random(10,30)));
+    }
+    palms = [];
+    for (let i = 0; i < 20; i++){
+      palms.push(new Palm(p.random(-800,800),p.random(-800,800),p.random(5,10),p.random(5,8),p));
+    }
+    pillars = [];
+    for (let i = 0; i < 30; i++){
+      pillars.push(new Pillar(p.random(-800,800),p.random(-800,800),p.random(8,14),p.random(2,8)));
     }
 
     loaded();
@@ -397,13 +449,36 @@ function drawTrack(p = p5.instance) {
 
 
     p.pop();
-    for (let i = 0; i < cacti.length; i++){
-      p.push();
-        p.translate(cacti[i].x,0,cacti[i].z);
-        if (objectDrawn(p,10,p.sqrt(cacti[i].x*cacti[i].x+cacti[i].z*cacti[i].z),(bigradius-effectiveRadius),effectiveRadius)){
-          drawCactus(p,cacti[i].height,2,-2,0);
-        }
-      p.pop();
+
+    if (environmentMode == 3){
+      for (let i = 0; i < cacti.length; i++){
+        p.push();
+          p.translate(cacti[i].x,0,cacti[i].z);
+          if (objectDrawn(p,10,p.sqrt(cacti[i].x*cacti[i].x+cacti[i].z*cacti[i].z),(bigradius-effectiveRadius),effectiveRadius)){
+            drawCactus(p,cacti[i].height,2,-2,0);
+          }
+        p.pop();
+      }
+    }
+    else if (environmentMode == 1){
+      for (let i = 0; i < palms.length; i++){
+        p.push();
+          p.translate(palms[i].x,0,palms[i].z);
+          if (objectDrawn(p,10,p.sqrt(palms[i].x*palms[i].x+palms[i].z*palms[i].z),(bigradius-effectiveRadius),effectiveRadius)){
+            drawPalm(p,palms[i].size,palms[i].angleList,0,6);
+          }
+        p.pop();
+      }
+    }
+    else if (environmentMode == 6){
+      for (let i = 0; i < pillars.length; i++){
+        p.push();
+          p.translate(pillars[i].x,0,pillars[i].z);
+          if (objectDrawn(p,30,p.sqrt(pillars[i].x*pillars[i].x+pillars[i].z*pillars[i].z),(bigradius-effectiveRadius),effectiveRadius)){
+            drawPillar(p,pillars[i].height,pillars[i].size);
+          }
+        p.pop();
+      }
     }
     //drawCactus(p,20,2,-2,p.frameCount);
     p.push(); // car
@@ -495,6 +570,7 @@ function drawCactus(p = p5.instance, size, arm1, arm2, rotation){
     p.rotateY(rotation);
     p.translate(0,-size/2,0);
     p.fill(9,145,11);
+    p.texture(cactusTexture);
     p.cylinder(size/8,size);
     p.push();
       p.translate(0,-size/2)
@@ -524,6 +600,61 @@ function drawCactus(p = p5.instance, size, arm1, arm2, rotation){
       p.translate(0,-size/6,0);
       p.sphere(size/12);
     p.pop();
+  p.pop();
+}
+function drawPalm(p = p5.instance, size, angleList, angle, leaves){
+  p.push();
+    // trunk
+    p.texture(palmBarkTexture);
+    let topX = 0;
+    for (let i = 0; i < angleList.length; i++){
+      p.push();
+        p.translate(topX,-i*size,0);
+        p.rotateZ(angleList[i]);
+        p.translate(0,-size/2,0);
+        topX += p.sin(angleList[i])*(size*1.2);
+        p.cylinder(size*0.4,size*1.2);
+      p.pop();
+    }
+    // fronds
+    p.texture(palmFrondTexture);
+    p.push();
+      p.translate(topX,-size*angleList.length,0);
+      p.rotateX(90);
+      p.rotateY(angleList[angleList.length-1]);
+      for (let i = 0; i < leaves; i++){
+        console.log(i);
+        p.push();
+          p.rotateZ(i/leaves * 360);
+          p.translate(size * 0.34,0,size*.2);
+          p.rotateY(-30);
+          p.plane(size*0.8);
+          p.rotateY(30);
+          p.translate(size*0.6,0,size*.17);
+          p.plane(size*0.7);
+          p.rotateY(30);
+          p.translate(size*0.52,0,size*.13);
+          p.plane(size*0.6);
+          p.rotateY(30);
+          p.translate(size*0.44,0,size*.1);
+          p.plane(size*0.5);
+        p.pop();
+      }
+    p.pop();
+  p.pop();
+}
+function drawPillar(p = p5.instance, height, size){
+  p.texture(pillarTexture);
+  p.push();
+    p.translate(0,-size/4,0);
+    p.box(size*2.5,size/2,size*2.5);
+    p.translate(0,size*1.6,0);
+    for (let i = 0; i < height; i++){
+      p.translate(0,-size*1.5,0);
+      p.cylinder(size*0.8,size);
+      p.translate(0,-size*1.6,0);
+      p.cylinder(size,size*3);
+    }
   p.pop();
 }
 var f = function(p) {
