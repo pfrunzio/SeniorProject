@@ -206,6 +206,7 @@ var t = function(p) {
 
   };
 };
+
 function loaded(){
   document.getElementById('loaderWrapper').classList.add("loaderFade");
   console.log("A");
@@ -353,8 +354,8 @@ function drawTrack(p = p5.instance) {
         p.texture(dayTexture);
       }
       p.push();
-      p.translate(0,0,-500);
-      p.plane(1000);
+      p.translate(0,0,-800);
+      p.plane(1300);
       p.pop();
 
       let behind = 80;

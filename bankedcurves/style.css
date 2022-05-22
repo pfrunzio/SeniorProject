@@ -15,6 +15,12 @@ body {
   z-index: 1;
 
 }
+.noSelect{
+  user-select: none;
+}
+.doSelect{
+  user-select: text;
+}
 .loaderFade{
   opacity: 0;
   visibility: hidden;
@@ -182,9 +188,11 @@ input:checked + .b {
 }
 .dirt {
   background-image: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/983d5aea-ba23-4e43-a697-d32a53deac25/ddty47l-04078173-88d4-49fc-8c02-eb0bbf18ce4f.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzk4M2Q1YWVhLWJhMjMtNGU0My1hNjk3LWQzMmE1M2RlYWMyNVwvZGR0eTQ3bC0wNDA3ODE3My04OGQ0LTQ5ZmMtOGMwMi1lYjBiYmYxOGNlNGYucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.d8IksyWLJuibXcwh9yoERlsYLWr9QF8cPyuJHrABuwM");
+  background-size:100px;
 }
 .sand {
   background-image: url("https://thumbs.dreamstime.com/b/k-seamless-sand-texture-surface-high-resolution-155924341.jpg");
+
 }
 
 /* switches */
