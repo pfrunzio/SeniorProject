@@ -37,10 +37,12 @@ class Cactus{
   x;
   z;
   height;
-  constructor(x,z,height){
+  rot;
+  constructor(x,z,height,rot){
     this.x = x;
     this.z = z;
     this.height = height;
+    this.rot = rot;
   }
 }
 class Palm{
@@ -48,10 +50,14 @@ class Palm{
   z;
   size;
   angleList;
-  constructor(x,z,size,h,p = p5.instance){
+  fronds;
+  rot;
+  constructor(x,z,size,h,fronds,rot,p = p5.instance){
     this.x = x;
     this.z = z;
     this.size = size;
+    this.fronds = fronds;
+    this.rot = rot;
     this.angleList = [];
     let angle = 0;
     for (let i = 0; i < h; i++){
@@ -67,19 +73,24 @@ class Pillar{
   z;
   size;
   height;
-  constructor(x,z,size,height){
+  rot;
+  constructor(x,z,size,height,rot){
     this.x = x;
     this.z = z;
     this.size = size;
     this.height = height;
+    this.rot = rot;
   }
 }
 
 var t = function(p) {
   p.setup = function() {
     // setup HTML elements
-
-    p.createCanvas(600, 500, p.WEBGL);
+    let top = document.getElementById("top");
+    let bottom = document.getElementById("bottom");
+    let y = bottom.offsetTop - top.offsetHeight - 16;
+    console.log(top.offsetHeight, bottom.offsetTop, y);
+    p.createCanvas((y*6/5), y, p.WEBGL);
     trackResolution = 1;
     angle = 45;
     fcoeff = 0.2;
@@ -146,15 +157,15 @@ var t = function(p) {
 
     cacti = [];
     for (let i = 0; i < 50; i++){
-      cacti.push(new Cactus(p.random(-800,800),p.random(-800,800),p.random(10,30)));
+      cacti.push(new Cactus(p.random(-800,800),p.random(-800,800),p.random(10,30),p.random(0,360)));
     }
     palms = [];
     for (let i = 0; i < 20; i++){
-      palms.push(new Palm(p.random(-800,800),p.random(-800,800),p.random(5,10),p.random(5,8),p));
+      palms.push(new Palm(p.random(-800,800),p.random(-800,800),p.random(5,10),p.random(6,8),p.random(5,8),p.random(0,360),p));
     }
     pillars = [];
     for (let i = 0; i < 30; i++){
-      pillars.push(new Pillar(p.random(-800,800),p.random(-800,800),p.random(8,14),p.random(2,8)));
+      pillars.push(new Pillar(p.random(-800,800),p.random(-800,800),p.random(8,14),p.random(2,8),p.random(0,360)));
     }
 
     loaded();
@@ -355,7 +366,7 @@ function drawTrack(p = p5.instance) {
       }
       p.push();
       p.translate(0,0,-800);
-      p.plane(1300);
+      p.plane(1500);
       p.pop();
 
       let behind = 80;
@@ -470,7 +481,7 @@ function drawTrack(p = p5.instance) {
         p.push();
           p.translate(cacti[i].x,0,cacti[i].z);
           if (objectDrawn(p,10,p.sqrt(cacti[i].x*cacti[i].x+cacti[i].z*cacti[i].z),(bigradius-effectiveRadius),effectiveRadius)){
-            drawCactus(p,cacti[i].height,2,-2,0);
+            drawCactus(p,cacti[i].height,2,-2,cacti[i].rot);
           }
         p.pop();
       }
@@ -480,7 +491,7 @@ function drawTrack(p = p5.instance) {
         p.push();
           p.translate(palms[i].x,0,palms[i].z);
           if (objectDrawn(p,10,p.sqrt(palms[i].x*palms[i].x+palms[i].z*palms[i].z),(bigradius-effectiveRadius),effectiveRadius)){
-            drawPalm(p,palms[i].size,palms[i].angleList,0,6);
+            drawPalm(p,palms[i].size,palms[i].angleList,palms[i].rot,palms[i].fronds);
           }
         p.pop();
       }
@@ -490,7 +501,7 @@ function drawTrack(p = p5.instance) {
         p.push();
           p.translate(pillars[i].x,0,pillars[i].z);
           if (objectDrawn(p,30,p.sqrt(pillars[i].x*pillars[i].x+pillars[i].z*pillars[i].z),(bigradius-effectiveRadius),effectiveRadius)){
-            drawPillar(p,pillars[i].height,pillars[i].size);
+            drawPillar(p,pillars[i].height,pillars[i].size,pillars[i].rot);
           }
         p.pop();
       }
@@ -620,6 +631,7 @@ function drawCactus(p = p5.instance, size, arm1, arm2, rotation){
 function drawPalm(p = p5.instance, size, angleList, angle, leaves){
   p.push();
     // trunk
+    p.rotateY(angle);
     p.texture(palmBarkTexture);
     let topX = 0;
     for (let i = 0; i < angleList.length; i++){
@@ -658,9 +670,10 @@ function drawPalm(p = p5.instance, size, angleList, angle, leaves){
     p.pop();
   p.pop();
 }
-function drawPillar(p = p5.instance, height, size){
+function drawPillar(p = p5.instance, height, size, rot){
   p.texture(pillarTexture);
   p.push();
+    p.rotateY(rot);
     p.translate(0,-size/4,0);
     p.box(size*2.5,size/2,size*2.5);
     p.translate(0,size*1.6,0);
@@ -780,30 +793,6 @@ function drawFBD(p = p5.instance){
 
   p.pop();
 
-}
-var f = function(p) {
-  p.setup = function() {
-    p.createCanvas(600, 500, p.P2D);
-    p.angleMode(p.DEGREES);
-    document.getElementById("defaultCanvas2").classList.add('layered');
-  };
-  p.draw = function() {
-    p.background(220);
-
-    drawOverlay(p);
-
-  };
-};
-var myp5 = new p5(f, 'overlay');
-function drawOverlay(p = p5.instance){
-  p.clear();
-  p.fill(100);
-
-  if (cameraMode == 1){
-    //p.ellipse(300,350,10,10);
-  }
-  //p.fill(30,140,50);
-  //p.ellipse(565,35,50,50);
 }
 function objectDrawn(p = p5.instance, radius, distance, width,fullrad){
   if (distance + radius < fullrad - width || distance - radius > fullrad + width){

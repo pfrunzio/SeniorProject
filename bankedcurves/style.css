@@ -47,6 +47,16 @@ body {
   color: white;
   background-color: #294681;
 }
+#top{
+  position: relative;
+  top: 0px;
+  width: 100%;
+}
+#bottom{
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+}
 #bar1 {
   width: 40px;
   height: 150px;
@@ -132,18 +142,13 @@ body {
 .num {
   width:45px;
 }
-.layered {
-  position:absolute;
-  left:8px;
-  top:103px;
-  width:1200px;
-  height:1000px;
-}
 
 canvas {
   display: block;
 }
+#defaultCanvas0{
 
+}
 
 /* envi buttons */
 .background {
@@ -343,6 +348,9 @@ input:checked + .s:before {
     left:90px;
     top:30px;
   }
+}
+.horizontalBlock {
+  display:inline-block;
 }
 .playpause {
 	 display: block;
