@@ -31,6 +31,7 @@ var pillars;
 var rolling;
 var slipping;
 var slippedAmt;
+var F_fs_real;
 
 class Cactus{
   x;
@@ -262,6 +263,13 @@ function changeAllDependents(){
   F_N = F_C * Math.sin(ra) + F_G * Math.cos(ra);
   //(F_G * Math.cos(ra)/Math.sin(ra) + F_C)/(Math.sin(ra)+Math.cos(ra)*Math.cos(ra)/Math.sin(ra));
   F_fs = F_G * Math.sin(ra) - F_C * Math.cos(ra);
+  F_fs_real = F_fs;
+  if (F_fs_real > fcoeff * F_N){
+    F_fs_real = fcoeff * F_N;
+  }
+  else if (F_fs_real < -fcoeff * F_N){
+    F_fs_real = -fcoeff * F_N;
+  }
   gf = F_N / F_G;
   pf = F_fs / (fcoeff * F_N);
   document.getElementById('gforce').innerHTML = gf.toFixed(3);
@@ -705,7 +713,13 @@ function drawFBD(p = p5.instance){
     }
 
 
-    let values = [F_G,F_N,F_fs,F_C];
+
+    let F_Netx = F_N * p.sin(angle) - F_fs_real * p.cos(angle);
+    let F_Nety = F_N * p.cos(angle) + F_fs_real * p.sin(angle) - F_G;
+    let F_Net = p.sqrt(F_Netx * F_Netx + F_Nety * F_Nety);
+    let F_Net_angle = p.atan(F_Nety / F_Netx);
+
+    let values = [F_G,F_N,F_fs_real,F_Net];
     values = clamp(p,values,90);
     // arrows
     // positive x is down the slope, positive y is into the slope
@@ -736,6 +750,7 @@ function drawFBD(p = p5.instance){
     p.text('Fg', 120, -40);
 
     if (FcSwitch.checked == true) {
+      p.rotate(-F_Net_angle);
       drawArrow(p,p.createVector(0,0),p.createVector(values[3],0),'red',1,3); // centripetal force
     }
 
