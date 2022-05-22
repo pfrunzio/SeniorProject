@@ -115,82 +115,56 @@
           <div class="shadow round" style="background-color:#aaa">
 
             <div class="uielement">
-              <div>
-                Track Radius
-              </div>
-              <div class="slidecontainer">
-                <input type="range" min="10" max="75" value="15" class="slider" id="radiusSlider" oninput="changeRadiusSlider(this.value)">
-              </div>
+              </br>
+              Track Radius
+              <input type="range" min="10" max="75" value="15" class="slider" id="radiusSlider" oninput="changeRadiusSlider(this.value)">
               <span>$r=$</span>
               <input type="number" min="10" max="75" value="15" class="num" id="radiusNum" onKeyDown="return false" oninput="changeRadiusSlider(this.value)">
               <span>m</span>
-            </div>
+              </br>
+              </br>
 
-            <div class="uielement">
-              <div>
-                Curve Angle
-              </div>
-              <div class="slidecontainer">
-                <input type="range" min="10" max="70" value="45" class="slider" id="angleSlider" oninput="changeAngleSlider(this.value)">
-              </div>
+              Curve Angle
+              <input type="range" min="10" max="70" value="45" class="slider" id="angleSlider" oninput="changeAngleSlider(this.value)">
               <span>$\theta=$</span>
               <input type="number" min="10" max="70" value="45" class="num" id="angleNum" onKeyDown="return false" oninput="changeAngleSlider(this.value)">
               <span>$^{\circ}$</span>
-            </div>
+              </br>
+              </br>
 
-            <div class="uielement">
-              <div>
-                Friction Coefficient
-              </div>
-              <div class="slidecontainer">
-                <input type="range" min=".05" max="1" step=".01" value=".2" class="slider" id="frictionSlider" oninput="changeFrictionSlider(this.value)">
-              </div>
+              Friction Coefficient
+              <input type="range" min=".05" max="1" step=".01" value=".2" class="slider" id="frictionSlider" oninput="changeFrictionSlider(this.value)">
               <span>$\mu=$</span>
               <input type="number" min=".05" max="1" step=".01" value=".2" class="num" id="frictionNum" onKeyDown="return false" oninput="changeFrictionSlider(this.value)">
-            </div>
+              </br>
+              </br>
 
-            <div class="uielement">
-              <div>
-                Car Speed
-              </div>
-              <div class="slidecontainer">
-                <input type="range" min="1" max="100" value="10" class="slider" id="speedSlider" oninput="changeSpeedSlider(this.value)">
-              </div>
+              Car Speed
+              <input type="range" min="1" max="100" value="10" class="slider" id="speedSlider" oninput="changeSpeedSlider(this.value)">
               <span>$v=$</span>
               <input type="number" min="1" max="100" value="10" class="num" id="speedNum" onKeyDown="return false" oninput="changeSpeedSlider(this.value)">
               <span>$\frac{m}{s}$</span>
-            </div>
+              </br>
+              </br>
 
-            <div class="uielement">
-              <div>
-                Gravity
-              </div>
-              <div class="slidecontainer">
+              Gravity
               <input type="range" min="5" max="100" step=".1" value="9.8" class="slider" id="gravitySlider" oninput="changeGravitySlider(this.value)">
-              </div>
               <span>$g=$</span>
               <input type="number" min="5" max="100" step=".1" value="9.8" class="num" id="gravityNum" onKeyDown="return false" oninput="changeGravitySlider(this.value)">
               <span>$\frac{m}{s^2}$</span>
-            </div>
+              </br>
+              </br>
 
-            <div class="uielement">
-              <div>
-                Car Mass
-              </div>
-              <div class="slidecontainer">
-                <input type="range" min="10" max="1000" value="100" class="slider" id="massSlider" oninput="changeMassSlider(this.value)">
-              </div>
+              Car Mass
+              <input type="range" min="10" max="1000" value="100" class="slider" id="massSlider" oninput="changeMassSlider(this.value)">
               <span>$m=$</span>
               <input type="number" min="10" max="1000" value="100" class="num" id="massNum" onKeyDown="return false" oninput="changeMassSlider(this.value)">
               <span>$kg$</span>
+              </br>
+              </br>
+
             </div>
           </div>
-
-          <label class="switch">
-            <input type="checkbox" id="play" name="playButton" oninput="togglePlay()" checked>
-            <div class="playpause"></div>
-          </label>
-
         </div>
 
         <div class="column">
@@ -224,31 +198,102 @@
 
           <div class="row" style="width:100%">
             <div class="shadow round" style="background-color:#aaa">
-              <div class="uielement">
-                <div>
-                  Effective G-Force:
-                </div>
+              <div class="uielement center" style="width:100%; margin-left: 0px;">
+
+              </br>
+                Effective G-Force:
+              </br>
                 <span class = "inlinelatex">
                   $G = \frac{F_N}{mg} = $
                 </span>
                 <span id="gforce" class="inlinelatex">
                   1
                 </span>
-              </div>
-              <div class="uielement">
-                <div>
-                  % Max Friction:
-                </div>
+              </br>
+
+              </br>
+                % Max Friction:
+              </br>
                 <span class = "inlinelatex">
                   $\%F = \frac{F_fs}{\mu F_N} = $
                 </span>
                 <span id="pfriction" class="inlinelatex">
                   1
                 </span>
+              </br>
+              </br>
+
               </div>
             </div>
           </div>
 
+        <label class="switch">
+          <input type="checkbox" id="play" name="playButton" oninput="togglePlay()" checked>
+          <div class="playpause"></div>
+        </label>
+
+        </div>
+
+        <div class="column">
+          <div class="shadow round" style="background-color:#aaa">
+
+          </br>
+          Forces
+          </br>
+          </br>
+          <div class="uielement">
+            <span class = "inlinelatex">
+              $F_fs = $
+            </span>
+            <span id="F_fs" class="inlinelatex">
+              1
+            </span>
+            <span class = "inlinelatex">
+              $N$
+            </span>
+          </div>
+
+          </br>
+          <div class="uielement">
+            <span class = "inlinelatex">
+              $F_N = $
+            </span>
+            <span id="F_N" class="inlinelatex">
+              1
+            </span>
+            <span class = "inlinelatex">
+              $N$
+            </span>
+          </div>
+
+          </br>
+          <div class="uielement">
+            <span class = "inlinelatex">
+              $F_g = $
+            </span>
+            <span id="F_g" class="inlinelatex">
+              1
+            </span>
+            <span class = "inlinelatex">
+              $N$
+            </span>
+          </div>
+
+          </br>
+          <div class="uielement">
+            <span class = "inlinelatex">
+              $F_c = $
+            </span>
+            <span id="F_c" class="inlinelatex">
+              1
+            </span>
+            <span class = "inlinelatex">
+              $N$
+            </span>
+          </div>
+          </br>
+
+          </div>
         </div>
 
       </div>
