@@ -275,6 +275,12 @@ function changeAllDependents(){
   document.getElementById('gforce').innerHTML = gf.toFixed(3);
   document.getElementById('pfriction').innerHTML = Math.abs((pf*100).toFixed(1))+"%";
 
+  //display force values
+  document.getElementById('F_fs').innerHTML = F_fs.toFixed(3);
+  document.getElementById('F_N').innerHTML = F_N.toFixed(3);
+  document.getElementById('F_g').innerHTML = F_G.toFixed(3);
+  document.getElementById('F_c').innerHTML = F_C.toFixed(3);
+
   if (radius == 66 && angle == 66 && fcoeff == 0.66 && speed == 66 && gravity == 66.6 && mass == 666){
     environmentMode = 6;
   }
@@ -752,6 +758,12 @@ function drawFBD(p = p5.instance){
     if (FcSwitch.checked == true) {
       p.rotate(-F_Net_angle);
       drawArrow(p,p.createVector(0,0),p.createVector(values[3],0),'red',1,3); // centripetal force
+      //label
+      p.fill('white');
+      p.stroke('red');
+      p.textSize(16);
+      p.text('Fc', 120, -20);
+
     }
 
   p.pop();

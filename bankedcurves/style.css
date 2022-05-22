@@ -84,7 +84,8 @@ body {
   padding: 8px;
 }
 .uielement {
-  margin: 20px;
+  margin-right: 20px;
+  margin-left: 20px;
   width: 130px;
 }
 .row {
