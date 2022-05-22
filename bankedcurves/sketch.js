@@ -711,13 +711,15 @@ function drawFBD(p = p5.instance){
     //cart
     if (cartSwitch.checked == true) {
       p.fill(255,0,0);
-      p.rect(-carLength/2,-carHeight-wheelRadius,carLength,carHeight);
+      p.strokeWeight(1);
+      p.rect(-carLength/2,-carHeight*2-wheelRadius,carLength,carHeight*2);
+      p.rect(-carLength)
       p.ellipseMode(p.CENTER);
       p.fill(200);
       p.circle(-carLength/2+wheelRadius+2,-wheelRadius,wheelRadius*2);
       p.circle(carLength/2-wheelRadius-2,-wheelRadius,wheelRadius*2);
     }
-
+    p.strokeWeight(3);
 
 
     let F_Netx = F_N * p.sin(angle) - F_fs_real * p.cos(angle);
@@ -735,7 +737,9 @@ function drawFBD(p = p5.instance){
     p.fill('white');
     p.stroke('purple');
     p.textSize(16);
-    p.text('FN', 120, -60);
+    p.text('F', 125, -55);
+    p.textSize(10);
+    p.text('N', 135, -50);
     p.rotate(angle);
 
     drawArrow(p,p.createVector(0,0),p.createVector(-values[2],0),'orange',1,3); //frictional force
@@ -744,7 +748,9 @@ function drawFBD(p = p5.instance){
     p.fill('white');
     p.stroke('orange');
     p.textSize(16);
-    p.text('Ffs', 120, -80);
+    p.text('F', 125, -80);
+    p.textSize(10);
+    p.text('fs', 135, -75);
     p.rotate(angle);
 
     p.rotate(-angle);
@@ -753,7 +759,9 @@ function drawFBD(p = p5.instance){
     p.fill('white');
     p.stroke('green');
     p.textSize(16);
-    p.text('Fg', 120, -40);
+    p.text('F', 125, -30);
+    p.textSize(10);
+    p.text('G', 135, -25);
 
     if (FcSwitch.checked == true) {
       p.rotate(-F_Net_angle);
@@ -763,7 +771,9 @@ function drawFBD(p = p5.instance){
       p.fill('white');
       p.stroke('red');
       p.textSize(16);
-      p.text('FNet', 120, -20);
+      p.text('F', 115, -5);
+      p.textSize(10);
+      p.text('Net', 125, 0);
 
     }
 
