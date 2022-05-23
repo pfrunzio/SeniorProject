@@ -46,7 +46,7 @@
           <div class="shadow round" style="background-color:#aaa">
 
             <div class="uielement">
-              <div class="slidercontainer">
+              <div class="container">
                 Track Radius
                 <input type="range" min="10" max="75" value="15" class="slider" id="radiusSlider" oninput="changeRadiusSlider(this.value)">
                 <span>$r=$</span>
@@ -54,7 +54,7 @@
                 <span>m</span>
               </div>
 
-              <div class="slidercontainer">
+              <div class="container">
                 Curve Angle
                 <input type="range" min="10" max="70" value="45" class="slider" id="angleSlider" oninput="changeAngleSlider(this.value)">
                 <span>$\theta=$</span>
@@ -62,14 +62,14 @@
                 <span>$^{\circ}$</span>
               </div>
 
-              <div class="slidercontainer">
+              <div class="container">
                 Friction Coefficient
                 <input type="range" min=".05" max="1" step=".01" value=".2" class="slider" id="frictionSlider" oninput="changeFrictionSlider(this.value)">
                 <span>$\mu=$</span>
                 <input type="number" min=".05" max="1" step=".01" value=".2" class="num" id="frictionNum" onKeyDown="return false" oninput="changeFrictionSlider(this.value)">
               </div>
 
-              <div class="slidercontainer">
+              <div class="container">
                 Car Speed
                 <input type="range" min="1" max="100" value="10" class="slider" id="speedSlider" oninput="changeSpeedSlider(this.value)">
                 <span>$v=$</span>
@@ -77,7 +77,7 @@
                 <span>$\frac{m}{s}$</span>
               </div>
 
-              <div class="slidercontainer">
+              <div class="container">
                 Gravity
                 <input type="range" min="5" max="100" step=".1" value="9.8" class="slider" id="gravitySlider" oninput="changeGravitySlider(this.value)">
                 <span>$g=$</span>
@@ -85,7 +85,7 @@
                 <span>$\frac{m}{s^2}$</span>
               </div>
 
-              <div class="slidercontainer">
+              <div class="container">
                 Car Mass
                 <input type="range" min="10" max="1000" value="100" class="slider" id="massSlider" oninput="changeMassSlider(this.value)">
                 <span>$m=$</span>
@@ -105,13 +105,13 @@
 
         <div class="column">
           <div class="row">
-            <div class="column" style="padding-top:0px">
+            <div class="column" style="padding-top:0vh">
               <div class="shadow round" style="background-color:#aaa">
 
-                </br>
+              <div class="container">
                 Forces
-                </br>
-                </br>
+              </div>
+              <div class="container">
                 <div class="uielement">
                   <span class = "inlinelatex">
                     $F_{fs} = $
@@ -123,8 +123,9 @@
                     $N$
                   </span>
                 </div>
+              </div>
 
-                </br>
+              <div class="container">
                 <div class="uielement">
                   <span class = "inlinelatex">
                     $F_N = $
@@ -136,8 +137,9 @@
                     $N$
                   </span>
                 </div>
+              </div>
 
-                </br>
+              <div class="container">
                 <div class="uielement">
                   <span class = "inlinelatex">
                     $F_G = $
@@ -149,8 +151,9 @@
                     $N$
                   </span>
                 </div>
+              </div>
 
-                </br>
+              <div class="container">
                 <div class="uielement">
                   <span class = "inlinelatex">
                     $F_C = $
@@ -162,45 +165,41 @@
                     $N$
                   </span>
                 </div>
-                </br>
-
               </div>
-              <div class="row" style="width:100%">
-                <div class="shadow round" style="background-color:#aaa">
-                  <div class="uielement center" style="width:100%; margin-left: 0px;">
 
-                  </br>
+              <div class="row" style="width:100%">
+                  <div class="uielement center" style="width:100%; margin-left: 0vw;">
+
+                  <div class="container">
                     Effective G-Force:
-                  </br>
+                  </div>
+                  <div class="container">
                     <span class = "inlinelatex">
                       $G = \frac{F_N}{mg} = $
                     </span>
                     <span id="gforce" class="inlinelatex doSelect">
                       1
                     </span>
-                  </br>
+                  </div>
 
-                  </br>
+                  <div class="container">
                     % Max Friction:
-                  </br>
+                  </div>
+                  <div class="container">
                     <span class = "inlinelatex">
                       $\%F = \frac{F_fs}{\mu F_N} = $
                     </span>
                     <span id="pfriction" class="inlinelatex doSelect">
                       1
                     </span>
-                  </br>
-                  </br>
+                  </div>
 
                   </div>
                 </div>
               </div>
             </div>
-            <div class="column" style="padding-top:0px">
+            <div class="column" style="padding-top:0ph">
               <div id="fbd" class="shadow"></div>
-              <br>
-
-
             </div>
 
           </div>
@@ -210,7 +209,7 @@
         <div class="column">
           <div class="row">
             <div class="column">
-              <div class="shadow round" style="background-color:#aaa">
+              <div class="shadow round" style="background-color:#aaa; width: 24vw; margin-top: -1.2vh;">
                 Camera Point Of View
                 <div class="row">
                   <div class="column">
@@ -219,8 +218,9 @@
                         <input type="radio" id="abovePOV" name="camera" value="abovePOV" oninput="changePOV(this.value)" checked>
                         <div class="s round"></div>
                       </label>
-                      <br><br>
-                      Above Track
+                      <div class="container">
+                        Above
+                      </div>
                     </div>
                   </div>
                   <div class="column">
@@ -229,8 +229,9 @@
                         <input type="radio" id="behindPOV" name="camera" value="behindPOV" oninput="changePOV(this.value)">
                         <div class="s round"></div>
                       </label>
-                      <br><br>
-                      Parallel to Track
+                      <div class="container inlinelatex">
+                        $ \parallel $ Track
+                      </div>
                     </div>
                   </div>
                   <div class="column">
@@ -239,8 +240,9 @@
                         <input type="radio" id="behindPOV2" name="camera" value="behindPOV2" oninput="changePOV(this.value)">
                         <div class="s round"></div>
                       </label>
-                      <br><br>
-                      Parallel to Ground
+                      <div class="container inlinelatex">
+                        $ \parallel $ Ground
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -274,7 +276,7 @@
           </div>
 
           <br>
-          <div class="shadow round" style="background-color:#aaa; width:600px">
+          <div class="shadow round" style="background-color:#aaa; width:39vw; margin-top: -1.2vh; margin-left: .5vw">
             Background
             <div class="row">
               <div class="column">

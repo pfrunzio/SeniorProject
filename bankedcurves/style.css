@@ -104,15 +104,14 @@ body {
   margin-left: 1vw;
   width: 10vw;
 }
-.slidercontainer {
+.container {
   margin-top: 1vh;
   margin-bottom: 1vh;
 }
-
 .cameraelement {
-  margin-right: 5px;
-  margin-left: 5px;
-  width: 80px;
+  margin-right: 1vw;
+  margin-left: 1vw;
+  width: 5vw;
 }
 .row {
   display: table;
