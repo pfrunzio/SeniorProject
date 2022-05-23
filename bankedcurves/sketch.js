@@ -168,7 +168,7 @@ var t = function(p) {
       pillars.push(new Pillar(p.random(-800,800),p.random(-800,800),p.random(8,14),p.random(2,8),p.random(0,360)));
     }
 
-    loaded();
+    // loaded();
   };
   p.draw = function() {
     p.background(220);
