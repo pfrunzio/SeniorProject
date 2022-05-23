@@ -284,14 +284,14 @@ function changeAllDependents(){
   }
   gf = F_N / F_G;
   pf = F_fs / (fcoeff * F_N);
-  document.getElementById('gforce').innerHTML = gf.toFixed(3);
+  document.getElementById('gforce').innerHTML = gf.toFixed(2);
   document.getElementById('pfriction').innerHTML = Math.abs((pf*100).toFixed(1))+"%";
 
   //display force values
-  document.getElementById('F_fs').innerHTML = F_fs.toFixed(3);
-  document.getElementById('F_N').innerHTML = F_N.toFixed(3);
-  document.getElementById('F_g').innerHTML = F_G.toFixed(3);
-  document.getElementById('F_c').innerHTML = F_C.toFixed(3);
+  document.getElementById('F_fs').innerHTML = F_fs.toFixed(1);
+  document.getElementById('F_N').innerHTML = F_N.toFixed(1);
+  document.getElementById('F_g').innerHTML = F_G.toFixed(1);
+  document.getElementById('F_c').innerHTML = F_C.toFixed(1);
 
   if (radius == 66 && angle == 66 && fcoeff == 0.66 && speed == 66 && gravity == 66.6 && mass == 666){
     environmentMode = 6;
@@ -690,7 +690,7 @@ function drawPillar(p = p5.instance, height, size, rot){
 }
 var f = function(p) {
   p.setup = function() {
-    p.createCanvas(280, 240, p.P2D);
+    p.createCanvas(300, 240, p.P2D);
     p.angleMode(p.DEGREES);
 
   };
@@ -704,7 +704,7 @@ var f = function(p) {
 var myp5 = new p5(f, 'fbd');
 
 function drawFBD(p = p5.instance){
-
+  p.scale(1.2,1.2);
   // track
   let tSize = 150;
   let h = tSize;
