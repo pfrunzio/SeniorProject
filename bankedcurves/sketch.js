@@ -690,7 +690,7 @@ function drawPillar(p = p5.instance, height, size, rot){
 }
 var f = function(p) {
   p.setup = function() {
-    p.createCanvas(300, 240, p.P2D);
+    p.createCanvas(280, 240, p.P2D);
     p.angleMode(p.DEGREES);
 
   };
