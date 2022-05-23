@@ -104,10 +104,14 @@ body {
   margin-left: 20px;
   width: 130px;
 }
+.cameraelement {
+  margin-right: 5px;
+  margin-left: 5px;
+  width: 80px;
+}
 .row {
   display: table;
 }
-
 
 /*basic div classes*/
 
@@ -146,8 +150,9 @@ body {
 canvas {
   display: block;
 }
-#defaultCanvas0{
-
+#defaultCanvas1{
+  width:450px;
+  height:360px;
 }
 
 /* envi buttons */
@@ -362,6 +367,11 @@ input:checked + .s:before {
 	 cursor: pointer;
 	 border-style: double;
 	 border-width: 0px 0 0px 60px;
+}
+.playpausebox{
+  padding:10px;
+  background-color:blue;
+  height:100px;
 }
 
 input[type="checkbox"]:checked + .playpause {

@@ -96,8 +96,8 @@
 
             </div>
           </div>
-          <div>
-            <label class="switch">
+          <div class="playpausebox">
+            <label class="switch" style="height:0px">
               <input type="checkbox" id="play" name="playButton" oninput="togglePlay()" checked>
               <div class="playpause"></div>
             </label>
@@ -106,7 +106,7 @@
 
         <div class="column">
           <div class="row">
-            <div class="column">
+            <div class="column" style="padding-top:0px">
               <div class="shadow round" style="background-color:#aaa">
 
                 </br>
@@ -197,10 +197,57 @@
                 </div>
               </div>
             </div>
-            <div class="column">
+            <div class="column" style="padding-top:0px">
               <div id="fbd" class="shadow"></div>
               <br>
 
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="column">
+          <div class="row">
+            <div class="column">
+              <div class="shadow round" style="background-color:#aaa">
+                Camera Point Of View
+                <div class="row">
+                  <div class="column">
+                    <div class="cameraelement">
+                      <label class="camera">
+                        <input type="radio" id="abovePOV" name="camera" value="abovePOV" oninput="changePOV(this.value)" checked>
+                        <div class="s round"></div>
+                      </label>
+                      <br><br>
+                      Above Track
+                    </div>
+                  </div>
+                  <div class="column">
+                    <div class="cameraelement">
+                      <label class="camera">
+                        <input type="radio" id="behindPOV" name="camera" value="behindPOV" oninput="changePOV(this.value)">
+                        <div class="s round"></div>
+                      </label>
+                      <br><br>
+                      Parallel to Track
+                    </div>
+                  </div>
+                  <div class="column">
+                    <div class="cameraelement">
+                      <label class="camera">
+                        <input type="radio" id="behindPOV2" name="camera" value="behindPOV2" oninput="changePOV(this.value)">
+                        <div class="s round"></div>
+                      </label>
+                      <br><br>
+                      Parallel to Ground
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="column">
               <div class="row">
                 <div class="column">
                   <label class="switch">
@@ -225,13 +272,7 @@
                 </div>
               </div>
             </div>
-
           </div>
-
-        </div>
-
-        <div class="column">
-
 
           <br>
           <div class="shadow round" style="background-color:#aaa; width:600px">
@@ -267,41 +308,7 @@
             </div>
           </div>
           <br>
-          <div class="shadow round" style="background-color:#aaa">
-            Camera Point Of View
-            <div class="row">
-              <div class="column">
-                <div class="uielement">
-                  <label class="camera">
-                    <input type="radio" id="abovePOV" name="camera" value="abovePOV" oninput="changePOV(this.value)" checked>
-                    <div class="s round"></div>
-                  </label>
-                  <br><br>
-                  Above
-                </div>
-              </div>
-              <div class="column">
-                <div class="uielement">
-                  <label class="camera">
-                    <input type="radio" id="behindPOV" name="camera" value="behindPOV" oninput="changePOV(this.value)">
-                    <div class="s round"></div>
-                  </label>
-                  <br><br>
-                  Parallel to Track
-                </div>
-              </div>
-              <div class="column">
-                <div class="uielement">
-                  <label class="camera">
-                    <input type="radio" id="behindPOV2" name="camera" value="behindPOV2" oninput="changePOV(this.value)">
-                    <div class="s round"></div>
-                  </label>
-                  <br><br>
-                  Parallel to Ground
-                </div>
-              </div>
-            </div>
-          </div>
+
         </div>
 
 

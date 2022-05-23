@@ -295,6 +295,9 @@ function changeAllDependents(){
 
   if (radius == 66 && angle == 66 && fcoeff == 0.66 && speed == 66 && gravity == 66.6 && mass == 666){
     environmentMode = 6;
+    document.getElementById('grass').checked = false;
+    document.getElementById('dirt').checked = false;
+    document.getElementById('sand').checked = false;
   }
 }
 function radians(a){
@@ -687,7 +690,7 @@ function drawPillar(p = p5.instance, height, size, rot){
 }
 var f = function(p) {
   p.setup = function() {
-    p.createCanvas(250, 200, p.P2D);
+    p.createCanvas(450, 360, p.P2D);
     p.angleMode(p.DEGREES);
 
   };
