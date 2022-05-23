@@ -359,6 +359,8 @@ input:checked + .s:before {
 }
 .playpause {
 	 display: block;
+   position: relative;
+   left: -10px;
 	 box-sizing: border-box;
 	 width: 0;
 	 height: 74px;
@@ -369,9 +371,9 @@ input:checked + .s:before {
 	 border-width: 0px 0 0px 60px;
 }
 .playpausebox{
-  padding:10px;
-  background-color:blue;
-  height:100px;
+  padding:30px;
+  background-color:#C24D2F;
+  height:110px;
 }
 
 input[type="checkbox"]:checked + .playpause {
