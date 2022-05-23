@@ -168,7 +168,7 @@ var t = function(p) {
       pillars.push(new Pillar(p.random(-800,800),p.random(-800,800),p.random(8,14),p.random(2,8),p.random(0,360)));
     }
 
-    // loaded();
+    loaded();
   };
   p.draw = function() {
     p.background(220);
@@ -220,7 +220,7 @@ var t = function(p) {
 
 function loaded(){
   document.getElementById('loaderWrapper').classList.add("loaderFade");
-  console.log("A");
+  console.log("loaded");
 }
 function changeRadiusSlider(i){
   radius = Number(i);
