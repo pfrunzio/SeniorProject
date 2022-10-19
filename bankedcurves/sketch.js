@@ -136,7 +136,7 @@ var t = function(p) {
       'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/983d5aea-ba23-4e43-a697-d32a53deac25/ddty47l-04078173-88d4-49fc-8c02-eb0bbf18ce4f.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzk4M2Q1YWVhLWJhMjMtNGU0My1hNjk3LWQzMmE1M2RlYWMyNVwvZGR0eTQ3bC0wNDA3ODE3My04OGQ0LTQ5ZmMtOGMwMi1lYjBiYmYxOGNlNGYucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.d8IksyWLJuibXcwh9yoERlsYLWr9QF8cPyuJHrABuwM'
     );
     carTexture = p.loadImage(
-      'https://media.istockphoto.com/photos/grunge-red-background-picture-id1131429835?b=1&k=20&m=1131429835&s=170667a&w=0&h=uWJekGgrp4tutizcH3-DB1f0YJGHzI-8Np7Gig07WjA='
+      'https://media.istockphoto.com/photos/red-textured-wall-picture-id674368114?b=1&k=20&m=674368114&s=170667a&w=0&h=cZ0f6mQP0DIo8begTVWjDemkep0THQFyqwQQ2Za8V9s='
     );
     cactusTexture = p.loadImage(
       'https://thumbs.dreamstime.com/b/seamless-pattern-cactus-texture-cactus-spots-green-background-seamless-pattern-cactus-texture-119128236.jpg'
